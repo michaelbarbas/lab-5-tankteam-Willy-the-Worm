@@ -324,9 +324,11 @@ void Game::replace(unsigned row, unsigned col, GameElement *old, chtype c)
   e->draw(display, row, col);
 }
 
+/*
 int main(int argc, char *argv[])
 { Game *game=new Game(argc>1?argv[1]:"willy1.txt");
 
   game->start();
   delete(game);
 }
+*/
