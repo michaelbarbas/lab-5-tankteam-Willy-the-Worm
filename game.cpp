@@ -1,4 +1,3 @@
-#include <curses.h>
 #include <time.h>
 
 #include <algorithm>
@@ -31,12 +30,11 @@ GameElement::GameElement(const chtype name) : name(name) {}
 GameElement::GameElement() : name(0) {}
 
 #define FIXACS(c,code) ((code)?(code):(c))
-Game::Game(const char *map, MainFrame display) :
+Game::Game(const char *map, GameDisplay *display) :
   rows(24), columns(40), startRow(0), startCol(0)
 {   list<string> contents;
     ifstream file(map,ios::binary);
-    char page[rows*columns], 
-         *pos;
+    std::unique_ptr<char> page(new char[rows*columns]);
     size_t r=0;
 
     init();
@@ -57,71 +55,26 @@ Game::Game(const char *map, MainFrame display) :
         catalog[i]=new GameElement(127);
 
     // Read the level from the file.
-    while(file.read(page,rows*columns))
-    {   levels.push_back(std:vector<GameElement*>(rows));
-        level=new (GameElement *)[]
-    
-        for(int r=0; r<rows; r++)
-        {
-            GameElement **line=new (GameElement*)[columns];
-            for(int c=0, p=r; c<columns; c++, p+=rows)
-                line[c]=catalog[page[p]];
-            level->push_back(line);
-        }
-    }
-    
-    level=&levels.front();
-    
-    pos=std::memchr(page,0,24*40); // Look for Willy's Home.
-    if(pos!=nullptr)
-    { 
-        startCol=(pos-page)/24; // If found, update the start location.
-        startRow=pos-page-startCol*24;
-    }
-  
+    while(file.read(page.get(), rows*columns))
+        levels.push_back(GameLevel(rows, columns, page.get(), catalog));
 
-    // Create the display and map.
-    for(list<string>::iterator i=contents.begin(); i!=contents.end(); i++)
-    {   for(pos=0; pos<i->size(); pos++)
-        {   GameElement *e=catalog[(unsigned char)(*i)[pos]];
-    
-            LEVEL(r,pos).push_back(e);
-            e->draw(display, r, pos);
-        }
+    switchLevel(0);
+    display->center(startRow, startCol, 10, 1);
 
-    while(pos<columns)
-    { GameElement *e=catalog[' '];
-    
-      LEVEL(r,pos).push_back(e);
-      e->draw(display, r, pos++);
-    }
-
-    r++;
-  }
-
-  // Create willy
-  willy=new Worm('&',startRow, startCol);
-  agents.push_front(willy);
-  LEVEL(startRow, startCol).push_back(willy);
-  willy->draw(display);
-  display->center(startRow, startCol, 10, 1);
-
-  reset();
-  showStatus();
-  display->clock(this);
+    reset();
+    showStatus();
+    display->clock(this);
 }
 
 Game::~Game()
-{ delete[](level);
-  delete(display);
+{ 
+    for(int i=0; i<256; i++)
+        delete(catalog[i]);
 
-  for(int i=0; i<256; i++)
-    delete(catalog[i]);
-
-  for(list<GameAgent *>::iterator i=agents.begin();
-      i!=agents.end();
-      i++)
-    delete(*i);
+    for(list<GameAgent *>::iterator i=agents.begin();
+            i!=agents.end();
+            i++)
+        delete(*i);
 }
 
 void Game::reset()
@@ -241,6 +194,34 @@ void Game::stepOff(GameAgent *agent, int col)
       a->stepOff(this, agent);
 }
   
+
+void Game::switchLevel(int new_level)
+{
+    current_level=new_level%levels.size();
+    GameLevel &l=levels[current_level];
+    startRow=l.getWormRow();
+    startCol=l.getWormColumn();
+    willy=new Worm(0, startRow, startCol);
+    level[l.getIndex(startRow, startCol)].push_back(willy);
+    
+    for(GameElement *elem: agents)
+        delete(elem);
+    agents.clear();
+
+    agents.push_back(willy);
+
+    for(int i=0; i<rows*columns; i++)
+    {   unsigned r,c;
+        l.getIndex(i, r, c);
+        level[i].clear();
+        GameElement *e=l.getElements()[i];
+        level[i].push_back(e);
+        e->draw(display, r, c);
+    }
+
+    willy->draw(display);
+}
+
 void Game::touch(GameAgent *agent)
 { unsigned row=agent->getRow(),
            col=agent->getCol();

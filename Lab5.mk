@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=scrain
-Date                   :=25/11/2017
+Date                   :=30/11/2017
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -52,7 +52,7 @@ LibPath                := $(LibraryPathSwitch).
 AR       := C:/TDM-GCC-64/bin/ar.exe rcu
 CXX      := C:/TDM-GCC-64/bin/g++.exe
 CC       := C:/TDM-GCC-64/bin/gcc.exe
-CXXFLAGS := -pedantic-errors -pedantic -std=c++11 -Wall -g -O0 -Wall $(shell wx-config --cxxflags --unicode=yes  ) $(Preprocessors)
+CXXFLAGS := -pedantic-errors -pedantic -std=c++11 -Wall -pedantic-errors -g -O0 -pedantic -std=c++11 -Wall $(shell wx-config --cxxflags --unicode=yes  ) $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(shell wx-config --cxxflags --unicode=yes  ) $(Preprocessors)
 ASFLAGS  := 
 AS       := C:/TDM-GCC-64/bin/as.exe
@@ -62,8 +62,9 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
+WXWIN:=C:\wxWidgets-3.1.0
 WXCFG:=gcc_dll\mswu
-Objects0=$(IntermediateDirectory)/gui.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/display.cpp$(ObjectSuffix) $(IntermediateDirectory)/game.cpp$(ObjectSuffix) $(IntermediateDirectory)/worm.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/gui.cpp$(ObjectSuffix) $(IntermediateDirectory)/game.cpp$(ObjectSuffix) $(IntermediateDirectory)/worm.cpp$(ObjectSuffix) $(IntermediateDirectory)/display.cpp$(ObjectSuffix) $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) 
 
 
 
@@ -102,22 +103,6 @@ $(IntermediateDirectory)/gui.cpp$(DependSuffix): gui.cpp
 $(IntermediateDirectory)/gui.cpp$(PreprocessSuffix): gui.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui.cpp$(PreprocessSuffix) gui.cpp
 
-$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/scrain/Documents/Hello/lab-5-template/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
-
-$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
-
-$(IntermediateDirectory)/display.cpp$(ObjectSuffix): display.cpp $(IntermediateDirectory)/display.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/scrain/Documents/Hello/lab-5-template/display.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/display.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/display.cpp$(DependSuffix): display.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/display.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/display.cpp$(DependSuffix) -MM display.cpp
-
-$(IntermediateDirectory)/display.cpp$(PreprocessSuffix): display.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/display.cpp$(PreprocessSuffix) display.cpp
-
 $(IntermediateDirectory)/game.cpp$(ObjectSuffix): game.cpp $(IntermediateDirectory)/game.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/scrain/Documents/Hello/lab-5-template/game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/game.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/game.cpp$(DependSuffix): game.cpp
@@ -133,6 +118,14 @@ $(IntermediateDirectory)/worm.cpp$(DependSuffix): worm.cpp
 
 $(IntermediateDirectory)/worm.cpp$(PreprocessSuffix): worm.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/worm.cpp$(PreprocessSuffix) worm.cpp
+
+$(IntermediateDirectory)/display.cpp$(ObjectSuffix): display.cpp $(IntermediateDirectory)/display.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/scrain/Documents/Hello/lab-5-template/display.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/display.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/display.cpp$(DependSuffix): display.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/display.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/display.cpp$(DependSuffix) -MM display.cpp
+
+$(IntermediateDirectory)/display.cpp$(PreprocessSuffix): display.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/display.cpp$(PreprocessSuffix) display.cpp
 
 $(IntermediateDirectory)/win_resources.rc$(ObjectSuffix): win_resources.rc
 	$(RcCompilerName) -i "C:/Users/scrain/Documents/Hello/lab-5-template/win_resources.rc" $(RcCmpOptions)   $(ObjectSwitch)$(IntermediateDirectory)/win_resources.rc$(ObjectSuffix) $(RcIncludePath)

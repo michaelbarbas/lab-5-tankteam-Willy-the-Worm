@@ -1,16 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <curses.h>
-
 #include <list>
+#include <memory>
 #include <string>
+#include <vector>
 
-// Definitions that are needed by display.h
-
-/* List of valid commands the program understands. */
-enum Command { STOP, LEFT, RIGHT, UP, DOWN, JUMP, DIE, QUIT,
-               NUMCOMMANDS};
+#include "display.h"
 
 // Utility macro to help with mapping commands to strings that can
 // be displayed.
@@ -159,7 +155,7 @@ public:
     GameLevel(unsigned rows, unsigned columns, char *level, GameElement **catalog):
         rows(rows), columns(columns)
     {   unsigned len=rows*columns;
-        elements=new (GameElement*)[len];
+        elements.reset(new GameElement*[len]);
         bool have_worm=false, have_ball=false;
     
         for(int i=0; i<len; i++)
@@ -170,17 +166,17 @@ public:
                 getIndex(i, worm_row, worm_column);
             }
                 
-            if(!have_have&&c<2)
+            if(!have_ball&&c==126)
             {   have_ball=true;
                 getIndex(i, ball_row, ball_column);
             }
             
-            elements[i]=catalog(c);
+            elements[i]=catalog[c];
         }
     }
     
     inline GameElement **getLevel()
-    {   return elements;
+    {   return elements.get();
     }
     
     inline unsigned getIndex(unsigned row, unsigned column)
@@ -193,14 +189,15 @@ public:
         row=index-column*rows;
     }
     
-    inline unsiged getRows() { return rows; }
-    inline unsiged getColumns() { return columns; }
-    inline unsiged getWormRow() { return worm_row; }
-    inline unsiged getWormColumn() { return worm_column; }
-    inline unsiged getBallRow() { return ball_row; }
-    inline unsiged getBallColumn() { return ball_column; }
+    inline unsigned getRows() { return rows; }
+    inline unsigned getColumns() { return columns; }
+    inline unsigned getWormRow() { return worm_row; }
+    inline unsigned getWormColumn() { return worm_column; }
+    inline unsigned getBallRow() { return ball_row; }
+    inline unsigned getBallColumn() { return ball_column; }
 };
     
+class Worm;
         
 /* Class for the whole game.
  * TODO: Move the level into its own class, so that we can support
@@ -215,8 +212,9 @@ class Game
 
     unsigned rows, columns, // The size of the map.
              startRow, startCol, // The starting location of Willy
-	     bonus; // The timer that counts down the bonus.
-	            // Timer units does not match what is on the display.
+             bonus, // The timer that counts down the bonus.
+	                // Timer units does not match what is on the display.
+             current_level=0; // The level that is currently active.
 
     /* level is an array of lists of game elements, one list for each
      * location in the map. The list stores all of the game elements that
@@ -225,8 +223,8 @@ class Game
      * TODO: Move this into a separate class, along with the logic for
      * loading a new level.
      */
-    std::list<GameElement *> *level;
-    std::vector<GameLevel> levels(8);
+    std::unique_ptr<std::list<GameElement *>[]> level;
+    std::vector<GameLevel> levels;
 
     /* A mapping used to help load the level from disk. The bytes in the
      * file indicate what to display where. This array maps from byte to
@@ -234,16 +232,13 @@ class Game
      */
     GameElement *catalog[256];
 
-    MainFrame *display; // The user interface.
+    GameDisplay *display; // The user interface.
 
     std::list<GameAgent *> agents; // A list of all agents so they can be
                                    // notified when it is their turn.
 
     Command command; // The command that is in effect for this turn.
-    class Worm *willy; // A reference for the main character.
-
-    bool clock(); // Private function that handles everything that happens
-                  // on every turn, like giving all the agents their turn.
+    Worm *willy; // A reference for the main character.
 
     // Check if row and column are inside the map.
     // Note that if row or column is negative, it will become
@@ -255,16 +250,22 @@ class Game
 
     // Helper utility to set up the commandnames array.
     void init()
-    { INITCOMMAND(STOP);
-      INITCOMMAND(LEFT);
-      INITCOMMAND(RIGHT);
-      INITCOMMAND(UP);
-      INITCOMMAND(DOWN);
-      INITCOMMAND(JUMP);
-      INITCOMMAND(DIE);
-      INITCOMMAND(QUIT);
+    {   INITCOMMAND(STOP);
+        INITCOMMAND(LEFT);
+        INITCOMMAND(RIGHT);
+        INITCOMMAND(UP);
+        INITCOMMAND(DOWN);
+        INITCOMMAND(JUMP);
+        INITCOMMAND(DIE);
+        INITCOMMAND(QUIT);
     }
-
+    
+    void switchLevel(int new_level);
+    
+    inline void switchLevel()
+    {   switchLevel(current_level+1);
+    }
+    
   public:
     /*******************************************
      * These functions are called by main() to *
@@ -272,12 +273,15 @@ class Game
      *******************************************/
 
     // Make a new game based on the given file.
-    Game(const char *level, MainFrame *display);
+    Game(const char *level, GameDisplay *display);
 
     // Clean up the game before releasing it. 
     // This one has lots to do!
     ~Game();
 
+    bool clock(); // Function that handles everything that happens
+                  // on every turn, like giving all the agents their turn.
+                  
     // Start the game. This function does not return until the game ends.
     void start();
 
