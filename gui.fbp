@@ -250,7 +250,7 @@
                         <event name="OnRightDown"></event>
                         <event name="OnRightUp"></event>
                         <event name="OnSetFocus"></event>
-                        <event name="OnSize"></event>
+                        <event name="OnSize">onResize</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -701,7 +701,7 @@
                 <property name="oneshot">0</property>
                 <property name="period">1000</property>
                 <property name="permission">protected</property>
-                <event name="OnTimer">clock</event>
+                <event name="OnTimer">onTick</event>
             </object>
         </object>
     </object>

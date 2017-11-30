@@ -89,18 +89,38 @@ class MainFrame : public MainFrameBase
          * @param command The new current command.
          */
         void setCommand(Command command);
+        
+        void clock() {}
             
+        void setGame(Game *game) { this.game=game; }
+        
 	protected:
 		// protected event handlers
 		virtual void OnCloseFrame( wxCloseEvent& event );
 		virtual void OnExitClick( wxCommandEvent& event );
         virtual void onPaint( wxPaintEvent& event );
+        virtual void onResize( wxSizeEvent& event ) { needrefesh=true; }
 		virtual void onSpriteSizeUpdate( wxScrollEvent& event );
 		virtual void onSpeedUpdate( wxScrollEvent& event );
-        virtual void clock( wxTimerEvent& event );
+        virtual void onTick( wxTimerEvent& event );
         
     private:
+        inline chtype &bufferEntry(int row, int col)
+        {
+            return buffer[row*width+col];
+        }
+        
         std::vector<wxBitmap> font, fontScaled;
+        unsigned width, height, // Size of the virtual map.
+                 y0, x0; // Location of the upper left corner of the displayed
+                         // part of the map.
+        chtype *buffer; // Contents of the full map.
+        std::vector<int> bufferUpdates;
+        Command command[256], // The mapping from key pressed to Command.
+                lastCommand, newCommand; // The previous and new commands.
+        bool done, // Flag to tell the input thread to exit.
+             needrefesh=false;
+        Game *game;
 };
 
 #endif //__wxmain__

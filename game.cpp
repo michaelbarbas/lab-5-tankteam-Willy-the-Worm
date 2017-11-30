@@ -8,6 +8,8 @@
 #include <sstream>
 #include <string>
 
+#include <cstring>
+
 #include "game.h"
 #include "worm.h"
 
@@ -29,66 +31,63 @@ GameElement::GameElement(const chtype name) : name(name) {}
 GameElement::GameElement() : name(0) {}
 
 #define FIXACS(c,code) ((code)?(code):(c))
-Game::Game(const char *level) :
-  rows(0), columns(0), startRow(0), startCol(0)
-{ list<string> contents;
-  ifstream file(level);
-  string line;
-  size_t pos, r=0;
+Game::Game(const char *map, MainFrame display) :
+  rows(24), columns(40), startRow(0), startCol(0)
+{   list<string> contents;
+    ifstream file(map,ios::binary);
+    char page[rows*columns], 
+         *pos;
+    size_t r=0;
 
-  init();
+    init();
 
-  for(int i=0; i<256; i++)
-    catalog[i]=NULL;
-
-  // Define special characters and the symbols they create
-  catalog['-']=new SolidGameElement('-');
-  catalog['=']=new SolidGameElement(FIXACS('=',ACS_HLINE));
-  catalog['|']=new SolidGameElement(FIXACS('|',ACS_VLINE));
-  catalog['<']=new SolidGameElement(FIXACS('+',ACS_ULCORNER));
-  catalog['>']=new SolidGameElement(FIXACS('+',ACS_URCORNER));
-  catalog['[']=new SolidGameElement(FIXACS('+',ACS_LLCORNER));
-  catalog[']']=new SolidGameElement(FIXACS('+',ACS_LRCORNER));
-  catalog['.']=new SolidGameElement(FIXACS('-',ACS_TTEE));
-  catalog[';']=new SolidGameElement(FIXACS('|',ACS_LTEE));
-  catalog[':']=new SolidGameElement(FIXACS('|',ACS_RTEE));
-  catalog[',']=new SolidGameElement(FIXACS('-',ACS_BTEE));
-  catalog['5']=new SolidGameElement(FIXACS('+',ACS_PLUS));
-
-  // Make background elements where agents will start.
-  catalog['&']=new GameElement(' ');
-
-  // For everything else, make a standard non-active element.
-  for(int i=0; i<256; i++)
-    if(!catalog[i])
-      catalog[i]=new GameElement(isgraph(i)?i:' ');
-
-  // Read the level from the file.
-  while(getline(file,line))
-  { contents.push_back(line);  
-
-    if(line.size()>columns)
-      columns=line.size();
-
-    pos=line.find('&'); // Look for Willy's Home.
-    if(pos!=string::npos)
-    { startRow=rows; // If found, update the start location.
-      startCol=pos;
-    }
-
-    rows++;
-  }
-
-  // Create the display and map.
-  display=new GameDisplay(columns, rows);
-  this->level=new list<GameElement *>[rows*columns];
-  for(list<string>::iterator i=contents.begin(); i!=contents.end(); i++)
-  { for(pos=0; pos<i->size(); pos++)
-    { GameElement *e=catalog[(unsigned char)(*i)[pos]];
+    catalog[0]=new GameElement(127);
+    catalog[1]=new GameElement(127);
     
-      LEVEL(r,pos).push_back(e);
-      e->draw(display, r, pos);
+    for(int i=2; i<51; i++)
+        catalog[i]=new GameElement(i);
+        
+    for(int i=51; i<91; i++)
+        catalog[i]=new SolidGameElement(i);
+        
+    for(int i=91; i<128; i++)
+        catalog[i]=new GameElement(i);
+    
+    for(int i=128; i<256; i++)
+        catalog[i]=new GameElement(127);
+
+    // Read the level from the file.
+    while(file.read(page,rows*columns))
+    {   levels.push_back(std:vector<GameElement*>(rows));
+        level=new (GameElement *)[]
+    
+        for(int r=0; r<rows; r++)
+        {
+            GameElement **line=new (GameElement*)[columns];
+            for(int c=0, p=r; c<columns; c++, p+=rows)
+                line[c]=catalog[page[p]];
+            level->push_back(line);
+        }
     }
+    
+    level=&levels.front();
+    
+    pos=std::memchr(page,0,24*40); // Look for Willy's Home.
+    if(pos!=nullptr)
+    { 
+        startCol=(pos-page)/24; // If found, update the start location.
+        startRow=pos-page-startCol*24;
+    }
+  
+
+    // Create the display and map.
+    for(list<string>::iterator i=contents.begin(); i!=contents.end(); i++)
+    {   for(pos=0; pos<i->size(); pos++)
+        {   GameElement *e=catalog[(unsigned char)(*i)[pos]];
+    
+            LEVEL(r,pos).push_back(e);
+            e->draw(display, r, pos);
+        }
 
     while(pos<columns)
     { GameElement *e=catalog[' '];

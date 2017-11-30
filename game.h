@@ -148,6 +148,60 @@ class GameAgent : public ActiveGameElement
     void draw(GameDisplay *disp) { GameElement::draw(disp, y, x); }
 };
 
+
+class GameLevel
+{
+private:
+    unsigned rows, columns, worm_row=0, worm_column=0, ball_row=0, ball_column=0;
+    std::unique_ptr<GameElement*[]> elements;
+
+public:
+    GameLevel(unsigned rows, unsigned columns, char *level, GameElement **catalog):
+        rows(rows), columns(columns)
+    {   unsigned len=rows*columns;
+        elements=new (GameElement*)[len];
+        bool have_worm=false, have_ball=false;
+    
+        for(int i=0; i<len; i++)
+        {   char c=level[i];
+        
+            if(!have_worm&&c<2)
+            {   have_worm=true;
+                getIndex(i, worm_row, worm_column);
+            }
+                
+            if(!have_have&&c<2)
+            {   have_ball=true;
+                getIndex(i, ball_row, ball_column);
+            }
+            
+            elements[i]=catalog(c);
+        }
+    }
+    
+    inline GameElement **getLevel()
+    {   return elements;
+    }
+    
+    inline unsigned getIndex(unsigned row, unsigned column)
+    {   return row+column*rows;
+    }
+    
+    inline void getIndex(unsigned index, unsigned &row, unsigned &column)
+    {
+        column=index/rows;
+        row=index-column*rows;
+    }
+    
+    inline unsiged getRows() { return rows; }
+    inline unsiged getColumns() { return columns; }
+    inline unsiged getWormRow() { return worm_row; }
+    inline unsiged getWormColumn() { return worm_column; }
+    inline unsiged getBallRow() { return ball_row; }
+    inline unsiged getBallColumn() { return ball_column; }
+};
+    
+        
 /* Class for the whole game.
  * TODO: Move the level into its own class, so that we can support
  *       multiple levels.
@@ -172,6 +226,7 @@ class Game
      * loading a new level.
      */
     std::list<GameElement *> *level;
+    std::vector<GameLevel> levels(8);
 
     /* A mapping used to help load the level from disk. The bytes in the
      * file indicate what to display where. This array maps from byte to
@@ -179,7 +234,7 @@ class Game
      */
     GameElement *catalog[256];
 
-    GameDisplay *display; // The user interface.
+    MainFrame *display; // The user interface.
 
     std::list<GameAgent *> agents; // A list of all agents so they can be
                                    // notified when it is their turn.
@@ -217,7 +272,7 @@ class Game
      *******************************************/
 
     // Make a new game based on the given file.
-    Game(const char *level);
+    Game(const char *level, MainFrame *display);
 
     // Clean up the game before releasing it. 
     // This one has lots to do!

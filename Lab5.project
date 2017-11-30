@@ -12,7 +12,6 @@
     <File Name="game.cpp"/>
     <File Name="worm.cpp"/>
     <File Name="wxmain.cpp"/>
-    <File Name="crsmain.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="gui.h"/>
@@ -20,7 +19,6 @@
     <File Name="worm.h"/>
     <File Name="willychr.h"/>
     <File Name="wxmain.h"/>
-    <File Name="crsmain.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="gui.fbp"/>

@@ -56,9 +56,10 @@ class MainFrameBase : public wxFrame
 		virtual void onAbortGame( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExitClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void onPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void onResize( wxSizeEvent& event ) { event.Skip(); }
 		virtual void onSpriteSizeUpdate( wxScrollEvent& event ) { event.Skip(); }
 		virtual void onSpeedUpdate( wxScrollEvent& event ) { event.Skip(); }
-		virtual void clock( wxTimerEvent& event ) { event.Skip(); }
+		virtual void onTick( wxTimerEvent& event ) { event.Skip(); }
 		
 	
 	public:

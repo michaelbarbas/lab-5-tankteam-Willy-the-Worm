@@ -68,9 +68,10 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	this->Connect( menuFileAbort->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::onAbortGame ) );
 	this->Connect( menuFileExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnExitClick ) );
 	m_panel1->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrameBase::onPaint ), NULL, this );
+	m_panel1->Connect( wxEVT_SIZE, wxSizeEventHandler( MainFrameBase::onResize ), NULL, this );
 	spritesize->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrameBase::onSpriteSizeUpdate ), NULL, this );
 	speed->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrameBase::onSpeedUpdate ), NULL, this );
-	this->Connect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( MainFrameBase::clock ) );
+	this->Connect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( MainFrameBase::onTick ) );
 }
 
 MainFrameBase::~MainFrameBase()
@@ -81,8 +82,9 @@ MainFrameBase::~MainFrameBase()
 	this->Disconnect( wxID_ABORT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::onAbortGame ) );
 	this->Disconnect( wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnExitClick ) );
 	m_panel1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrameBase::onPaint ), NULL, this );
+	m_panel1->Disconnect( wxEVT_SIZE, wxSizeEventHandler( MainFrameBase::onResize ), NULL, this );
 	spritesize->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrameBase::onSpriteSizeUpdate ), NULL, this );
 	speed->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrameBase::onSpeedUpdate ), NULL, this );
-	this->Disconnect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( MainFrameBase::clock ) );
+	this->Disconnect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( MainFrameBase::onTick ) );
 	
 }
