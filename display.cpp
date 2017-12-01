@@ -46,17 +46,27 @@ GameDisplay::GameDisplay(wxWindow *parent) : MainFrameBase( parent )
     {
         wxBitmap bitmap(font[i]);
         this->font.push_back(bitmap);
-        this->fontScaled.push_back(wxBitmap(bitmap.ConvertToImage().Scale(24,24,wxIMAGE_QUALITY_NORMAL)));
+        this->fontScaled.push_back(wxBitmap(bitmap.ConvertToImage().Scale(24,24,wxIMAGE_QUALITY_HIGH)));
     }
+    
+    for(int c=0; c<256; c++)
+        command[c]=STOP;
+        
+    command[(unsigned char)WXK_LEFT]=command[(unsigned char)WXK_NUMPAD_LEFT]=command[(unsigned char)WXK_NUMPAD4]=command['4']=LEFT;
+    command[(unsigned char)WXK_RIGHT]=command[(unsigned char)WXK_NUMPAD_RIGHT]=command[(unsigned char)WXK_NUMPAD6]=command['6']=RIGHT;
+    command[(unsigned char)WXK_UP]=command[(unsigned char)WXK_NUMPAD_UP]=command[(unsigned char)WXK_NUMPAD8]=command['8']=UP;
+    command[(unsigned char)WXK_DOWN]=command[(unsigned char)WXK_NUMPAD_DOWN]=command[(unsigned char)WXK_NUMPAD2]=command[(unsigned char)WXK_NUMPAD5]=command['2']=command['5']=DOWN;
+    command[' ']=JUMP;
+    command[27]=QUIT;
     
     try
     {
         game=new Game("../WILLY.DAT", this);
         //setGame(nullptr,40,24);
         needrefresh=true;
-        writeAt(0,0,135);
-        writeAt(1,1,135);
-        writeAt(2,2,135);
+        m_panel1->Refresh();
+        gameTimer.Start(300);
+        m_menuBar->Enable(wxID_ABORT, true);
     } catch(const std::exception &e)
     {
         std::ofstream file("debug.txt"); 
@@ -64,8 +74,6 @@ GameDisplay::GameDisplay(wxWindow *parent) : MainFrameBase( parent )
         file.close();
         Destroy();
     }
-    //gameTimer.Start(300);
-    //game->clock();
 }
 
 GameDisplay::~GameDisplay()
@@ -88,52 +96,56 @@ void GameDisplay::onAbortGame(wxCommandEvent& event)
 }
 
 void GameDisplay::onKeyDown(wxKeyEvent& event)
-{
-    newCommand=command[(unsigned char)event.GetKeyCode()];
+{   int key=event.GetKeyCode();
+    newCommand=command[(unsigned char)key];
 }
 
 void GameDisplay::onPaint( wxPaintEvent& event ) 
 {   if(!buffer) return;
 
     int scale=spritesize->GetValue();
-    int maxY, maxX;
+    int max_row, max_column;
 
-    m_panel1->GetSize(&maxY, &maxX);
-    maxY/=scale;
-    maxX/=scale;
+    m_panel1->GetSize(&max_column, &max_row);
+    max_row/=scale;
+    max_column/=scale;
 
-    wxClientDC draw(m_panel1);
+    wxPaintDC draw(m_panel1);
+    
     //draw.DrawBitmap(fontScaled[1],3*scale,5*scale);
     
-    if(needrefresh)
-    {   if(width-x0<(unsigned)maxX) maxX=width-x0;
-        if(height-y0<(unsigned)maxY) maxY=height-y0;
+    //if(needrefresh)
+    if(true)
+    {   if(columns-corner_column<(unsigned)max_column) max_column=columns-corner_column;
+        if(rows-corner_row<(unsigned)max_row) max_row=rows-corner_row;
         
-        for(int i=0; i<maxX; i++)
-            for(int j=0; j<maxY; j++)
+        for(int col=0; col<max_column; col++)
+            for(int row=0; row<max_row; row++)
             {
-                unsigned c=bufferEntry(j+y0,i+x0);
+                unsigned c=bufferEntry(row+corner_row,col+corner_column);
                 if(c<fontlen)
-                    draw.DrawBitmap(fontScaled[127],i*scale,j*scale);
+                    draw.DrawBitmap(fontScaled[127],col*scale,row*scale);
                 else
-                    draw.DrawBitmap(fontScaled[bufferEntry(j+y0,i+x0)-fontlen],i*scale,j*scale);
+                    draw.DrawBitmap(fontScaled[c-fontlen],col*scale,row*scale);
             }
+        
+        needrefresh=false;
     } else
     {
         for(unsigned a: bufferUpdates)
         {
-            unsigned i=a/width, j=a-i*width;
-            if(i>=x0 && j>=y0 && i<x0+maxX && j<y0+maxY)
+            unsigned row=a/columns, col=a-row*columns;
+            if(col>=corner_column && row>=corner_row && col<corner_column+max_column && row<corner_row+max_row)
             {
-                unsigned c=bufferEntry(j+y0,i+x0);
+                unsigned c=bufferEntry(row,col);
                 if(c<fontlen)
-                    draw.DrawBitmap(fontScaled[127],i*scale,j*scale);
+                    draw.DrawBitmap(fontScaled[127],col*scale,row*scale);
                 else
-                    draw.DrawBitmap(fontScaled[bufferEntry(j+y0,i+x0)-fontlen],i*scale,j*scale);
+                    draw.DrawBitmap(fontScaled[c-fontlen],col*scale,row*scale);
             }
         }
     }
-    
+        
     bufferUpdates.clear();
 }
 
@@ -142,10 +154,12 @@ void GameDisplay::onSpriteSizeUpdate( wxScrollEvent& event )
 
     for(unsigned i=0; i<fontlen; i++)
     {
-        this->fontScaled[i]=wxBitmap(font[i].ConvertToImage().Scale(scale,scale,wxIMAGE_QUALITY_NORMAL));
+        this->fontScaled[i]=wxBitmap(font[i].ConvertToImage().Scale(scale,scale,wxIMAGE_QUALITY_HIGH));
     }
     
+    corner_column=corner_row=0;
     needrefresh=true;
+    m_panel1->Refresh(true);
 }
 
 void GameDisplay::onSpeedUpdate( wxScrollEvent& event ) 
@@ -161,8 +175,10 @@ void GameDisplay::onSpeedUpdate( wxScrollEvent& event )
 */
 void GameDisplay::writeAt(unsigned row, unsigned column, const chtype c)
 {
+    int scale=spritesize->GetValue();
     bufferEntry(row,column)=c;
-    bufferUpdates.push_back(row*width+column);
+    bufferUpdates.push_back(row*columns+column);
+    m_panel1->RefreshRect(wxRect((column-corner_column)*scale,(row-corner_row)*scale,scale,scale),false);
 }
 
 /**
@@ -196,45 +212,52 @@ void GameDisplay::writeAt(unsigned row, unsigned column, const std::string s)
 void GameDisplay::center(unsigned row, unsigned column,
         unsigned border, unsigned scroll)
 {   int scale=spritesize->GetValue();
-    int maxY, maxX, move=y0+border-row;
+    int max_row, max_column, move=corner_row+border-row;
 
-    m_panel1->GetSize(&maxY, &maxX);
-    maxY/=scale;
-    maxX/=scale;
+    m_panel1->GetSize(&max_column, &max_row);
+    max_row/=scale;
+    max_column/=scale;
 
-    if(y0 && move>0)
-      { if((int)y0>move)
-          y0-=move+scroll-(move-1)%scroll-1;
-        else
-          y0=0;
+    if(max_row<rows)
+        if(corner_row && move>0)
+        {   move+=scroll-(move-1)%scroll-1;
+            if((int)corner_row>move)
+                corner_row-=move;
+            else
+                corner_row=0;
 
-        needrefresh=true;
-      } else
-        if(y0<height-maxY&&(move=row-y0-maxY+border)>0)
-        { if((int)(y0+maxY)-(int)height>move)
-            y0+=move+scroll-(move-1)%scroll-1;
-          else
-            y0=height-maxY;
+            needrefresh=true;
+        } else if(corner_row<rows-max_row&&(move=row-corner_row-max_row+border)>0)
+        {   move+scroll-(move-1)%scroll-1;
+            if((int)(corner_row+max_row)-(int)rows>move)
+                corner_row+=move;
+            else
+                corner_row=rows-max_row;
         
-          needrefresh=true;
+            needrefresh=true;
         }
 
-      if(x0 && (move=x0+border-column)>0)
-      { if((int)x0>move)
-          x0-=move+scroll-(move-1)%scroll-1;
-        else
-          x0=0;
+    if(max_column<columns)
+        if(corner_column && (move=corner_column+border-column)>0)
+        {   move+=scroll-(move-1)%scroll-1;
+            if((int)corner_column>move)
+                corner_column-=move;
+            else
+                corner_column=0;
 
-        needrefresh=true;
-      } else
-        if(x0<width-maxX&&(move=column-x0-maxX+border)>0)
-        { if((int)(x0+maxX)-(int)width>move)
-            x0+=move+scroll-(move-1)%scroll-1;
-          else
-            x0=width-maxX;
+            needrefresh=true;
+        } else if(corner_column<columns-max_column&&(move=column-corner_column-max_column+border)>0)
+        {   move+scroll-(move-1)%scroll-1;
+            if((int)(corner_column+max_column)-(int)columns>move)
+                corner_column+=move;
+            else
+                corner_column=columns-max_column;
 
-          needrefresh=true;
+            needrefresh=true;
         }
+        
+    if(needrefresh)
+        m_panel1->Refresh();
 }
         
 /**
@@ -255,13 +278,12 @@ void GameDisplay::setCommand(Command command)
     newCommand=command;
 }
 
-// TODO: Rename this to something else, because Game calls the clock method which should do nothing. 
-// TODO: Call Game's clock here.
 void GameDisplay::onTick( wxTimerEvent& event )
 {
     int s=-speed->GetValue();
     if(gameTimer.GetInterval()!=s)
         gameTimer.Start(s);
         
-    game->clock();
+    if(!game->clock())
+        Destroy();
 }

@@ -175,6 +175,12 @@ public:
         }
     }
     
+    inline void setWorm(unsigned row, unsigned column)
+    {
+        worm_row=row;
+        worm_column=column;
+    }
+    
     inline GameElement **getLevel()
     {   return elements.get();
     }

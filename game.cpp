@@ -15,7 +15,7 @@
 using namespace std;
 
 // Macro to access the contents by row and column
-#define LEVEL(r,c) (this->level[(r)*(this->columns)+(c)])
+#define LEVEL(r,c) (this->level[(c)*(this->rows)+(r)])
 
 #ifndef BONUSFRAMES
 #define BONUSFRAMES 14
@@ -34,7 +34,7 @@ Game::Game(const char *map, GameDisplay *display) :
   rows(24), columns(40), startRow(0), startCol(0), display(display)
 {   list<string> contents;
     ifstream file(map,ios::binary);
-    std::unique_ptr<char> page(new char[rows*columns]);
+    std::unique_ptr<char[]> page(new char[rows*columns]);
 
     init();
 
@@ -57,10 +57,12 @@ Game::Game(const char *map, GameDisplay *display) :
     while(file.read(page.get(), rows*columns))
         levels.push_back(GameLevel(rows, columns, page.get(), catalog));
 
+    for(int l=0; l<levels.size(); l++)
+        levels[l].setWorm(page[2*l+1]-1,page[2*l]-1);
+        
     level.reset(new std::list<GameElement *>[rows*columns]);
     display->setGame(this, rows, columns);
     switchLevel(0);
-    //display->center(startRow, startCol, 10, 1);
 
     reset();
     showStatus();
@@ -91,7 +93,7 @@ bool Game::clock()
   
   command=display->getCommand();
 
-  //display->writeAt(rows,0,commandName());
+  display->writeAt(rows,50,commandName());
 
   if(command==QUIT)
     return false;
@@ -202,7 +204,7 @@ void Game::switchLevel(int new_level)
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
     startCol=l.getWormColumn();
-    willy=new Worm(0, startRow, startCol);
+    willy=new Worm(128, startRow, startCol);
     
     for(GameElement *elem: agents)
         delete(elem);
@@ -221,6 +223,7 @@ void Game::switchLevel(int new_level)
     
     level[l.getIndex(startRow, startCol)].push_back(willy);
     willy->draw(display);
+    display->center(startRow, startCol, 10, 1);
 }
 
 void Game::touch(GameAgent *agent)

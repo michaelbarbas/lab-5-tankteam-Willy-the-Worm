@@ -8,20 +8,20 @@ class Worm : public GameAgent
 { 
   private:
     unsigned startRow, startCol, // Where to restart if willy dies.
-	     jumpstate, // In jump? 
+	     jumpstate=0, // In jump? 
 	                // 7 and 6 mean a jump is about to start.
 			// 5 through 4 mean the worm is going up.
 			// 3 through 1 mean the worm is going down.
 			// 0 means the worm is not jumping.
-	     jumpbase, // During a jump, this is the row the worm was in
+	     jumpbase=0, // During a jump, this is the row the worm was in
 	               // at the start of the jump. It is used to properly
 		       // handle jumps with inadequate headroom.
 	     lives; // Number of extra lives in reserve.
-    int residual; // This is the number of points that have been earned
+    int residual=0; // This is the number of points that have been earned
                   // (or lost if negative) since the last extra life
 		  // was earned.
-    Command dir; // Current direction the worm is moving.
-    unsigned long score; // Score
+    Command dir=STOP; // Current direction the worm is moving.
+    unsigned long score=0; // Score
 
     void gainLife(); // Call this when the residual gets high enough
                      // to add a new worm.

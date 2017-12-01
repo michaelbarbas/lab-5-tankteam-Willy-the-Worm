@@ -95,12 +95,12 @@ class GameDisplay : public MainFrameBase
         
         void clock(Game *game) {}
             
-        void setGame(Game *game, unsigned height, unsigned width) 
+        void setGame(Game *game, unsigned rows, unsigned columns) 
         { 
             this->game=game;
-            this->width=width;
-            this->height=height;
-            buffer.reset(new chtype[width*height]);
+            this->columns=columns;
+            this->rows=rows;
+            buffer.reset(new chtype[columns*rows]);
         }
         
 	protected:
@@ -108,9 +108,15 @@ class GameDisplay : public MainFrameBase
         virtual void onAbortGame( wxCommandEvent& event );
 		virtual void OnCloseFrame( wxCloseEvent& event );
 		virtual void OnExitClick( wxCommandEvent& event );
+        virtual void onGoUp( wxCommandEvent& event ) { newCommand=UP; }
+		virtual void onGoDown( wxCommandEvent& event ) { newCommand=DOWN; }
+		virtual void onGoLeft( wxCommandEvent& event ) { newCommand=LEFT; }
+		virtual void onGoRight( wxCommandEvent& event ) { newCommand=RIGHT; }
+		virtual void onGoJump( wxCommandEvent& event ) { newCommand=JUMP; }
+		virtual void onGoStop( wxCommandEvent& event ) { newCommand=STOP; }
         virtual void onKeyDown( wxKeyEvent& event );
         virtual void onPaint( wxPaintEvent& event );
-        virtual void onResize( wxSizeEvent& event ) { needrefresh=true; }
+        virtual void onResize( wxSizeEvent& event ) { corner_column=corner_row=0; needrefresh=true; m_panel1->Refresh(); }
 		virtual void onSpriteSizeUpdate( wxScrollEvent& event );
 		virtual void onSpeedUpdate( wxScrollEvent& event );
         virtual void onTick( wxTimerEvent& event );
@@ -118,18 +124,18 @@ class GameDisplay : public MainFrameBase
     private:
         chtype &bufferEntry(unsigned row, unsigned col)
         {
-            return buffer[row*width+col];
+            return buffer[row*columns+col];
         }
         
         std::vector<wxBitmap> font, fontScaled;
-        unsigned width=0, height=0, // Size of the virtual map.
-                 y0=0, x0=0, // Location of the upper left corner of the displayed
+        unsigned columns=0, rows=0, // Size of the virtual map.
+                 corner_row=0, corner_column=0, // Location of the upper left corner of the displayed
                          // part of the map.
                  fontlen=0;
         std::unique_ptr<chtype[]> buffer; // Contents of the full map.
         std::vector<unsigned> bufferUpdates;
         Command command[256], // The mapping from key pressed to Command.
-                lastCommand=STOP, newCommand=STOP; // The previous and new commands.
+                lastCommand=STOP, newCommand=RIGHT; // The previous and new commands.
         bool done=false, // Flag to tell the input thread to exit.
              needrefresh=false;
         Game *game=nullptr;

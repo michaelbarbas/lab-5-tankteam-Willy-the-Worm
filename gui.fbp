@@ -113,7 +113,7 @@
                 <event name="OnChar"></event>
                 <event name="OnEnterWindow"></event>
                 <event name="OnEraseBackground"></event>
-                <event name="OnKeyDown"></event>
+                <event name="OnKeyDown">onKeyDown</event>
                 <event name="OnKeyUp"></event>
                 <event name="OnKillFocus"></event>
                 <event name="OnLeaveWindow"></event>
@@ -165,6 +165,101 @@
                         <property name="shortcut">Alt+X</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">OnExitClick</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                </object>
+                <object class="wxMenu" expanded="1">
+                    <property name="label">Movement</property>
+                    <property name="name">m_menuMovement</property>
+                    <property name="permission">protected</property>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Up</property>
+                        <property name="name">m_menuUp</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">UP</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoUp</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Down</property>
+                        <property name="name">m_menuDown</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">DOWN</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoDown</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Left</property>
+                        <property name="name">m_menuLeft</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">LEFT</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoLeft</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Right</property>
+                        <property name="name">m_menuRight</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">RIGHT</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoRight</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Jump</property>
+                        <property name="name">m_menuJump</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">SPACE</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoJump</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Stop</property>
+                        <property name="name">m_menuStop</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">ANY</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">onGoStop</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -232,7 +327,7 @@
                         <event name="OnChar"></event>
                         <event name="OnEnterWindow"></event>
                         <event name="OnEraseBackground"></event>
-                        <event name="OnKeyDown"></event>
+                        <event name="OnKeyDown">onKeyDown</event>
                         <event name="OnKeyUp"></event>
                         <event name="OnKillFocus"></event>
                         <event name="OnLeaveWindow"></event>
@@ -324,7 +419,7 @@
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
-                                <event name="OnKeyDown"></event>
+                                <event name="OnKeyDown">onKeyDown</event>
                                 <event name="OnKeyUp"></event>
                                 <event name="OnKillFocus"></event>
                                 <event name="OnLeaveWindow"></event>
@@ -422,7 +517,7 @@
                                 <event name="OnCommandScrollTop"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
-                                <event name="OnKeyDown"></event>
+                                <event name="OnKeyDown">onKeyDown</event>
                                 <event name="OnKeyUp"></event>
                                 <event name="OnKillFocus"></event>
                                 <event name="OnLeaveWindow"></event>
@@ -515,7 +610,7 @@
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
-                                <event name="OnKeyDown"></event>
+                                <event name="OnKeyDown">onKeyDown</event>
                                 <event name="OnKeyUp"></event>
                                 <event name="OnKillFocus"></event>
                                 <event name="OnLeaveWindow"></event>
@@ -613,7 +708,7 @@
                                 <event name="OnCommandScrollTop"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
-                                <event name="OnKeyDown"></event>
+                                <event name="OnKeyDown">onKeyDown</event>
                                 <event name="OnKeyUp"></event>
                                 <event name="OnKillFocus"></event>
                                 <event name="OnLeaveWindow"></event>
@@ -673,7 +768,7 @@
                 <event name="OnChar"></event>
                 <event name="OnEnterWindow"></event>
                 <event name="OnEraseBackground"></event>
-                <event name="OnKeyDown"></event>
+                <event name="OnKeyDown">onKeyDown</event>
                 <event name="OnKeyUp"></event>
                 <event name="OnKillFocus"></event>
                 <event name="OnLeaveWindow"></event>

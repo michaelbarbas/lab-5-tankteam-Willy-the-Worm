@@ -42,6 +42,7 @@ class MainFrameBase : public wxFrame
 	protected:
 		wxMenuBar* m_menuBar;
 		wxMenu* m_menuFile;
+		wxMenu* m_menuMovement;
 		wxPanel* m_panel1;
 		wxStaticText* spriteSizeLabel;
 		wxSlider* spritesize;
@@ -55,6 +56,12 @@ class MainFrameBase : public wxFrame
 		virtual void onKeyDown( wxKeyEvent& event ) { event.Skip(); }
 		virtual void onAbortGame( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExitClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoUp( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoDown( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoLeft( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoRight( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoJump( wxCommandEvent& event ) { event.Skip(); }
+		virtual void onGoStop( wxCommandEvent& event ) { event.Skip(); }
 		virtual void onPaint( wxPaintEvent& event ) { event.Skip(); }
 		virtual void onResize( wxSizeEvent& event ) { event.Skip(); }
 		virtual void onSpriteSizeUpdate( wxScrollEvent& event ) { event.Skip(); }
