@@ -31,35 +31,36 @@ GameElement::GameElement() : name(0) {}
 
 #define FIXACS(c,code) ((code)?(code):(c))
 Game::Game(const char *map, GameDisplay *display) :
-  rows(24), columns(40), startRow(0), startCol(0)
+  rows(24), columns(40), startRow(0), startCol(0), display(display)
 {   list<string> contents;
     ifstream file(map,ios::binary);
     std::unique_ptr<char> page(new char[rows*columns]);
-    size_t r=0;
 
     init();
 
-    catalog[0]=new GameElement(127);
-    catalog[1]=new GameElement(127);
+    for(int i=0; i<128; i++)
+        catalog[i]=new GameElement(i);
+
+    catalog[128+0]=new GameElement(128+127);
+    catalog[128+1]=new GameElement(128+127);
     
-    for(int i=2; i<51; i++)
+    for(int i=128+2; i<128+51; i++)
         catalog[i]=new GameElement(i);
         
-    for(int i=51; i<91; i++)
+    for(int i=128+51; i<128+91; i++)
         catalog[i]=new SolidGameElement(i);
         
-    for(int i=91; i<128; i++)
+    for(int i=128+91; i<128+128; i++)
         catalog[i]=new GameElement(i);
-    
-    for(int i=128; i<256; i++)
-        catalog[i]=new GameElement(127);
 
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
         levels.push_back(GameLevel(rows, columns, page.get(), catalog));
 
+    level.reset(new std::list<GameElement *>[rows*columns]);
+    display->setGame(this, rows, columns);
     switchLevel(0);
-    display->center(startRow, startCol, 10, 1);
+    //display->center(startRow, startCol, 10, 1);
 
     reset();
     showStatus();
@@ -196,13 +197,12 @@ void Game::stepOff(GameAgent *agent, int col)
   
 
 void Game::switchLevel(int new_level)
-{
+{   //if(levels) return;
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
     startCol=l.getWormColumn();
     willy=new Worm(0, startRow, startCol);
-    level[l.getIndex(startRow, startCol)].push_back(willy);
     
     for(GameElement *elem: agents)
         delete(elem);
@@ -210,15 +210,16 @@ void Game::switchLevel(int new_level)
 
     agents.push_back(willy);
 
-    for(int i=0; i<rows*columns; i++)
+    for(unsigned i=0; i<rows*columns; i++)
     {   unsigned r,c;
         l.getIndex(i, r, c);
         level[i].clear();
-        GameElement *e=l.getElements()[i];
+        GameElement *e=l.getLevel()[i];
         level[i].push_back(e);
         e->draw(display, r, c);
     }
-
+    
+    level[l.getIndex(startRow, startCol)].push_back(willy);
     willy->draw(display);
 }
 

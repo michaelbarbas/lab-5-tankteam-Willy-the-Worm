@@ -158,15 +158,15 @@ public:
         elements.reset(new GameElement*[len]);
         bool have_worm=false, have_ball=false;
     
-        for(int i=0; i<len; i++)
-        {   char c=level[i];
+        for(unsigned i=0; i<len; i++)
+        {   unsigned char c=level[i];
         
-            if(!have_worm&&c<2)
+            if(!have_worm&&(c==128||c==129))
             {   have_worm=true;
                 getIndex(i, worm_row, worm_column);
             }
                 
-            if(!have_ball&&c==126)
+            if(!have_ball&&c==128+126)
             {   have_ball=true;
                 getIndex(i, ball_row, ball_column);
             }

@@ -44,7 +44,7 @@
             <property name="minimum_size"></property>
             <property name="name">MainFrameBase</property>
             <property name="pos"></property>
-            <property name="size">500,452</property>
+            <property name="size">1000,700</property>
             <property name="style">wxCLOSE_BOX|wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass"></property>
             <property name="title"></property>
