@@ -38,6 +38,11 @@ bool MainApp::OnInit()
 
 GameDisplay::GameDisplay(wxWindow *parent) : MainFrameBase( parent )
 {
+    // Kludge because the old version of wxFormBuilder on the lab machines does not
+    // support timers.
+    gameTimer.SetOwner( this, wxID_ANY );
+    this->Connect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( GameDisplay::onTick ) );
+    
     #include "willychr.h"
     std::vector<wxBitmap> fontBitmaps;
     this->fontlen=fontlen;
@@ -211,14 +216,16 @@ void GameDisplay::writeAt(unsigned row, unsigned column, const std::string s)
 */
 void GameDisplay::center(unsigned row, unsigned column,
         unsigned border, unsigned scroll)
-{   int scale=spritesize->GetValue();
-    int max_row, max_column, move=corner_row+border-row;
+{   unsigned scale=spritesize->GetValue();
+    int max_row, max_column;
+    int move=corner_row+border-row;
 
     m_panel1->GetSize(&max_column, &max_row);
     max_row/=scale;
     max_column/=scale;
 
-    if(max_row<rows)
+    if((unsigned)max_row<rows)
+    {
         if(corner_row && move>0)
         {   move+=scroll-(move-1)%scroll-1;
             if((int)corner_row>move)
@@ -227,8 +234,8 @@ void GameDisplay::center(unsigned row, unsigned column,
                 corner_row=0;
 
             needrefresh=true;
-        } else if(corner_row<rows-max_row&&(move=row-corner_row-max_row+border)>0)
-        {   move+scroll-(move-1)%scroll-1;
+        } else if((int)corner_row<(int)rows-max_row&&(move=row-corner_row-max_row+border)>0)
+        {   move+=scroll-(move-1)%scroll-1;
             if((int)(corner_row+max_row)-(int)rows>move)
                 corner_row+=move;
             else
@@ -236,8 +243,10 @@ void GameDisplay::center(unsigned row, unsigned column,
         
             needrefresh=true;
         }
+    }
 
-    if(max_column<columns)
+    if((unsigned)max_column<columns)
+    {
         if(corner_column && (move=corner_column+border-column)>0)
         {   move+=scroll-(move-1)%scroll-1;
             if((int)corner_column>move)
@@ -246,8 +255,8 @@ void GameDisplay::center(unsigned row, unsigned column,
                 corner_column=0;
 
             needrefresh=true;
-        } else if(corner_column<columns-max_column&&(move=column-corner_column-max_column+border)>0)
-        {   move+scroll-(move-1)%scroll-1;
+        } else if((int)corner_column<(int)columns-max_column&&(move=column-corner_column-max_column+border)>0)
+        {   move+=scroll-(move-1)%scroll-1;
             if((int)(corner_column+max_column)-(int)columns>move)
                 corner_column+=move;
             else
@@ -255,6 +264,7 @@ void GameDisplay::center(unsigned row, unsigned column,
 
             needrefresh=true;
         }
+    }
         
     if(needrefresh)
         m_panel1->Refresh();

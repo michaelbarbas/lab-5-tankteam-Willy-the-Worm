@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="Lab5" Version="10.0.0" InternalType="GUI">
+<CodeLite_Project Name="Lab5-wx" Version="10.0.0" InternalType="GUI">
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="display.cpp"/>
+    <File Name="game.cpp"/>
+    <File Name="worm.cpp"/>
+    <File Name="gui.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <File Name="gui.h"/>
+    <File Name="willychr.h"/>
+    <File Name="worm.h"/>
+    <File Name="display.h"/>
+    <File Name="game.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="resources">
+    <File Name="gui.fbp"/>
+    <File Name="README.md"/>
+    <File Name="willy1.txt"/>
+    <File Name="willy2.txt"/>
+    <File Name="willy3.txt"/>
+    <File Name="willy4.txt"/>
+    <File Name="willy5.txt"/>
+    <File Name="willy6.txt"/>
+    <File Name="willy7.txt"/>
+    <File Name="Willy.txt"/>
+    <File Name="WILLY.DAT"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -13,7 +39,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-Wall;$(shell wx-config --cxxflags --unicode=yes  )" C_Options="-g;-O0;-Wall;$(shell wx-config --cxxflags --unicode=yes  )" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-pedantic-errors;-g;-O0;-pedantic;-std=c++11;-Wall;$(shell wx-config --cxxflags --unicode=yes  )" C_Options="-g;-O0;-Wall;$(shell wx-config --cxxflags --unicode=yes  )" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <Preprocessor Value="__WX__"/>
       </Compiler>
       <Linker Options="$(shell wx-config   --libs --unicode=yes)" Required="yes"/>
@@ -92,31 +118,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src">
-    <File Name="gui.cpp"/>
-    <File Name="display.cpp"/>
-    <File Name="game.cpp"/>
-    <File Name="worm.cpp"/>
-    <File Name="wxmain.cpp"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="include">
-    <File Name="gui.h"/>
-    <File Name="display.h"/>
-    <File Name="game.h"/>
-    <File Name="willychr.h"/>
-    <File Name="worm.h"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="resources">
-    <File Name="gui.fbp"/>
-    <File Name="README.md"/>
-    <File Name="willy1.txt"/>
-    <File Name="willy2.txt"/>
-    <File Name="willy3.txt"/>
-    <File Name="willy4.txt"/>
-    <File Name="willy5.txt"/>
-    <File Name="willy6.txt"/>
-    <File Name="willy7.txt"/>
-    <File Name="Willy.txt"/>
-    <File Name="WILLY.DAT"/>
-  </VirtualDirectory>
 </CodeLite_Project>

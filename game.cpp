@@ -57,7 +57,7 @@ Game::Game(const char *map, GameDisplay *display) :
     while(file.read(page.get(), rows*columns))
         levels.push_back(GameLevel(rows, columns, page.get(), catalog));
 
-    for(int l=0; l<levels.size(); l++)
+    for(unsigned l=0; l<levels.size(); l++)
         levels[l].setWorm(page[2*l+1]-1,page[2*l]-1);
         
     level.reset(new std::list<GameElement *>[rows*columns]);
