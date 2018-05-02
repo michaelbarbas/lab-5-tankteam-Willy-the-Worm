@@ -1,4 +1,4 @@
-# Project 5
+# Project 6
 
 Starting from the code provided, your team will add some features to a game.
 
