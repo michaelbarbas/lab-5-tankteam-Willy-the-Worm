@@ -1,10 +1,10 @@
-# Project 6
+# Project 5
 
 Starting from the code provided, your team will add some features to a game.
 
 As I give it to you, it has some interesting levels but there isn't much that works. Play it a little bit to see what it is like currently.
 
-## Part 1: Simple change. (20 points)
+## Part 1: Simple change. (40 points)
 
 The first part of the assignment is to make a simple change that only requires creating a new class and hooking it into the program. You will only need to change game.h and game.cpp. Using SolidGameElement as an example, implement one of the following features:
 
@@ -42,3 +42,16 @@ Pick a feature from the list below and then work through the steps that follow. 
 6.  Divide the solution up into stages. What is the smallest change you can make that moves towards your goal while not changing very much? How can you test that change and make sure it works correctly? You should get a series of toddler steps that go from the current code to having your feature added. (5 points)
 7.  Complete the steps, one at a time, compiling and testing after each one. Don't forget to make backups along the way. (20 points)
 8.  Cheer with great gusto when it works ;-). (Should I give points for this?)
+
+### Additional Grading Details:
+
+*    10% Good use of git (initial commit of an empty project, frequent small commits, clear but brief explanations of the changes)
+*    10% Comments (purpose, use, author and date of whole project, purpose of each part of the code, explanations of any complicated code)
+*    10% Style (appropriate names for classes, variables, functions, good indentation and use of blank lines, consistent and approrpiate formatting)
+
+Penalties that can be taken off the score you would otherwise get:
+
+*    100% Penalty if the program does not use object-oriented C++. In this case, you must use encapsulation.
+*    100% Penalty if you shared work with another student (either giving or getting help) or other innaproriate use of resources.
+*    50% Penalty if your program will not compile.
+*    20% Penalty if there are any warning messages when your program is compiled with "g++ -Wall -pedantic -std=c++11".
