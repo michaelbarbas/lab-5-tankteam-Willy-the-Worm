@@ -218,8 +218,8 @@ void GameDisplay::center(unsigned row, unsigned column,
     max_row/=scale;
     max_column/=scale;
 
-    if(max_row<rows)
-        if(corner_row && move>0)
+    if(max_row<(int)rows)
+    {   if(corner_row && move>0)
         {   move+=scroll-(move-1)%scroll-1;
             if((int)corner_row>move)
                 corner_row-=move;
@@ -228,7 +228,7 @@ void GameDisplay::center(unsigned row, unsigned column,
 
             needrefresh=true;
         } else if(corner_row<rows-max_row&&(move=row-corner_row-max_row+border)>0)
-        {   move+scroll-(move-1)%scroll-1;
+        {   move+=scroll-(move-1)%scroll-1;
             if((int)(corner_row+max_row)-(int)rows>move)
                 corner_row+=move;
             else
@@ -236,9 +236,10 @@ void GameDisplay::center(unsigned row, unsigned column,
         
             needrefresh=true;
         }
+    }
 
-    if(max_column<columns)
-        if(corner_column && (move=corner_column+border-column)>0)
+    if(max_column<(int)columns)
+    {   if(corner_column && (move=corner_column+border-column)>0)
         {   move+=scroll-(move-1)%scroll-1;
             if((int)corner_column>move)
                 corner_column-=move;
@@ -247,7 +248,7 @@ void GameDisplay::center(unsigned row, unsigned column,
 
             needrefresh=true;
         } else if(corner_column<columns-max_column&&(move=column-corner_column-max_column+border)>0)
-        {   move+scroll-(move-1)%scroll-1;
+        {   move+=scroll-(move-1)%scroll-1;
             if((int)(corner_column+max_column)-(int)columns>move)
                 corner_column+=move;
             else
@@ -255,6 +256,7 @@ void GameDisplay::center(unsigned row, unsigned column,
 
             needrefresh=true;
         }
+    }
         
     if(needrefresh)
         m_panel1->Refresh();
