@@ -1,6 +1,6 @@
 static const char *font[][11] =
   {
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c yellow", ". c black",
       "........",
       "..XXXX..",
       ".X..XX..",
@@ -10,7 +10,7 @@ static const char *font[][11] =
       ".XX...X.",
       "X..XXX.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c yellow", ". c black",
       "........",
       "..XXXX..",
       "..XX..X.",
@@ -20,7 +20,7 @@ static const char *font[][11] =
       ".X...XX.",
       "..XXX..X"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c cyan", ". c black",
       "..X.X...",
       "...X....",
       ".XX.XX..",
@@ -30,7 +30,7 @@ static const char *font[][11] =
       ".XX.XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "X......X",
       "X......X",
       "XXXXXXXX",
@@ -40,7 +40,7 @@ static const char *font[][11] =
       "XXXXXXXX",
       "X......X"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c cyan", ". c black",
       "........",
       "........",
       "...X....",
@@ -50,7 +50,7 @@ static const char *font[][11] =
       "X..X..X.",
       ".XXXXX.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c cyan", ". c black",
       "........",
       "XXXXXX..",
       "......X.",
@@ -60,7 +60,7 @@ static const char *font[][11] =
       "......X.",
       "XXXXXX.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "X..X..X.",
       "X.X.X.X.",
@@ -70,7 +70,7 @@ static const char *font[][11] =
       "X.X.X.X.",
       ".X...X.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -80,7 +80,7 @@ static const char *font[][11] =
       "XXXXX...",
       ".XXX...."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c yellow", ". c black",
       "...X....",
       "..XXX...",
       ".XXXXX..",
@@ -90,7 +90,7 @@ static const char *font[][11] =
       "XXXXXXX.",
       "..X....."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX..XX..",
       "........",
       ".XXXX...",
@@ -100,7 +100,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXX.....",
       "........",
       ".XXXX...",
@@ -110,7 +110,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX..XX..",
       "........",
       ".XXX....",
@@ -120,7 +120,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXXXX..",
       "XX...XX.",
       "..XXX...",
@@ -130,7 +130,7 @@ static const char *font[][11] =
       "..XXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXX.....",
       "........",
       ".XXX....",
@@ -140,7 +140,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX...XX.",
       "..XXX...",
       ".XX.XX..",
@@ -150,7 +150,7 @@ static const char *font[][11] =
       "XX...XX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX....",
       "..XX....",
       "........",
@@ -160,7 +160,7 @@ static const char *font[][11] =
       "XX..XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XXX..",
       "........",
       "XXXXXX..",
@@ -170,7 +170,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       ".XXXXXXX",
@@ -180,7 +180,7 @@ static const char *font[][11] =
       ".XXXXXXX",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXXXX.",
       ".XX.XX..",
       "XX..XX..",
@@ -190,7 +190,7 @@ static const char *font[][11] =
       "XX..XXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXXX...",
       "XX..XX..",
       "........",
@@ -200,7 +200,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XX..XX..",
       "........",
@@ -210,7 +210,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXX.....",
       "........",
@@ -220,7 +220,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXXX...",
       "XX..XX..",
       "........",
@@ -230,7 +230,7 @@ static const char *font[][11] =
       ".XXXXXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXX.....",
       "........",
@@ -240,7 +240,7 @@ static const char *font[][11] =
       ".XXXXXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XX..XX..",
       "........",
@@ -250,7 +250,7 @@ static const char *font[][11] =
       "....XX..",
       "XXXXX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX....XX",
       "...XX...",
       "..XXXX..",
@@ -260,7 +260,7 @@ static const char *font[][11] =
       "...XX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX..XX..",
       "........",
       "XX..XX..",
@@ -270,7 +270,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       ".XXXXXX.",
@@ -280,7 +280,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.XX..",
       ".XX..X..",
@@ -290,7 +290,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX..XX..",
       "XX..XX..",
       ".XXXX...",
@@ -300,7 +300,7 @@ static const char *font[][11] =
       "..XX....",
       "..XX...."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXX...",
       "XX..XX..",
       "XX..XX..",
@@ -310,7 +310,7 @@ static const char *font[][11] =
       "XX...XX.",
       "XX...XXX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "....XXX.",
       "...XX.XX",
       "...XX...",
@@ -320,7 +320,7 @@ static const char *font[][11] =
       "XX.XX...",
       ".XXX...."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XXX..",
       "........",
       ".XXXX...",
@@ -330,7 +330,7 @@ static const char *font[][11] =
       ".XXXXXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       "........",
       ".XXX....",
@@ -340,7 +340,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "...XXX..",
       "........",
@@ -350,7 +350,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "...XXX..",
       "........",
@@ -360,7 +360,7 @@ static const char *font[][11] =
       ".XXXXXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXXXX...",
       "........",
@@ -370,7 +370,7 @@ static const char *font[][11] =
       "XX..XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXXX..",
       "........",
       "XX..XX..",
@@ -380,7 +380,7 @@ static const char *font[][11] =
       "XX..XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXXX..",
       ".XX.XX..",
       ".XX.XX..",
@@ -390,7 +390,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.XX..",
       ".XX.XX..",
@@ -400,7 +400,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX....",
       "........",
       "..XX....",
@@ -410,7 +410,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -420,7 +420,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -430,7 +430,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX....XX",
       "XX...XX.",
       "XX..XX..",
@@ -440,7 +440,7 @@ static const char *font[][11] =
       "XX..XX..",
       "....XXXX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX....XX",
       "XX...XX.",
       "XX..XX..",
@@ -450,7 +450,7 @@ static const char *font[][11] =
       "XX..XXXX",
       "......XX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "........",
@@ -460,7 +460,7 @@ static const char *font[][11] =
       "...XX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "..XX..XX",
       ".XX..XX.",
@@ -470,7 +470,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XX..XX..",
       ".XX..XX.",
@@ -480,7 +480,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..X...X.",
       "X...X...",
       "..X...X.",
@@ -490,7 +490,7 @@ static const char *font[][11] =
       "..X...X.",
       "X...X..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".X.X.X.X",
       "X.X.X.X.",
       ".X.X.X.X",
@@ -500,7 +500,7 @@ static const char *font[][11] =
       ".X.X.X.X",
       "X.X.X.X."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XX.XX.XX",
       ".XXX.XXX",
       "XX.XX.XX",
@@ -510,7 +510,7 @@ static const char *font[][11] =
       "XX.XX.XX",
       "XXX.XXX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -520,7 +520,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -530,7 +530,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "XXXXX...",
@@ -540,7 +540,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -550,7 +550,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -560,7 +560,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXX...",
@@ -570,7 +570,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "XXXX.XX.",
@@ -580,7 +580,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -590,7 +590,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXXXX.",
@@ -600,7 +600,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "XXXX.XX.",
@@ -610,7 +610,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -620,7 +620,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "XXXXX...",
@@ -630,7 +630,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -640,7 +640,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -650,7 +650,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -660,7 +660,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -670,7 +670,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -680,7 +680,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXXXXX",
@@ -690,7 +690,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -700,7 +700,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XXXXX",
@@ -710,7 +710,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -720,7 +720,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XXX",
@@ -730,7 +730,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "..XXXXXX",
@@ -740,7 +740,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "XXXX.XXX",
@@ -750,7 +750,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXXXXX",
@@ -760,7 +760,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XXX",
@@ -770,7 +770,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXXXXX",
@@ -780,7 +780,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "XXXX.XXX",
@@ -790,7 +790,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "XXXXXXXX",
@@ -800,7 +800,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -810,7 +810,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "XXXXXXXX",
@@ -820,7 +820,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -830,7 +830,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -840,7 +840,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XXXXX",
@@ -850,7 +850,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "...XXXXX",
@@ -860,7 +860,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -870,7 +870,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX.XX.",
       "..XX.XX.",
       "..XX.XX.",
@@ -880,7 +880,7 @@ static const char *font[][11] =
       "..XX.XX.",
       "..XX.XX."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "XXXXXXXX",
@@ -890,7 +890,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -900,7 +900,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -910,7 +910,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXXXXX",
       "XXXXXXXX",
       "XXXXXXXX",
@@ -920,7 +920,7 @@ static const char *font[][11] =
       "XXXXXXXX",
       "XXXXXXXX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -930,7 +930,7 @@ static const char *font[][11] =
       "XXXXXXXX",
       "XXXXXXXX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXX....",
       "XXXX....",
       "XXXX....",
@@ -940,7 +940,7 @@ static const char *font[][11] =
       "XXXX....",
       "XXXX...."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "....XXXX",
       "....XXXX",
       "....XXXX",
@@ -950,7 +950,7 @@ static const char *font[][11] =
       "....XXXX",
       "....XXXX"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXXXXX",
       "XXXXXXXX",
       "XXXXXXXX",
@@ -960,7 +960,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       ".XXX.XX.",
@@ -970,7 +970,7 @@ static const char *font[][11] =
       ".XXX.XX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       ".XXXX...",
       "XX..XX..",
@@ -980,7 +980,7 @@ static const char *font[][11] =
       "XX......",
       "XX......"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXXXXX..",
       "XX..XX..",
@@ -990,7 +990,7 @@ static const char *font[][11] =
       "XX......",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXXXXXX.",
       ".XX.XX..",
@@ -1000,7 +1000,7 @@ static const char *font[][11] =
       ".XX.XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXXX..",
       "XX..XX..",
       ".XX.....",
@@ -1010,7 +1010,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       ".XXXXXX.",
@@ -1020,7 +1020,7 @@ static const char *font[][11] =
       ".XXX....",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       ".XX..XX.",
       ".XX..XX.",
@@ -1030,7 +1030,7 @@ static const char *font[][11] =
       ".XX.....",
       "XX......"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       ".XXX.XX.",
       "XX.XXX..",
@@ -1040,7 +1040,7 @@ static const char *font[][11] =
       "...XX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "XXXXXX..",
       "..XX....",
       ".XXXX...",
@@ -1050,7 +1050,7 @@ static const char *font[][11] =
       "..XX....",
       "XXXXXX.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.XX..",
       "XX...XX.",
@@ -1060,7 +1060,7 @@ static const char *font[][11] =
       "..XXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.XX..",
       "XX...XX.",
@@ -1070,7 +1070,7 @@ static const char *font[][11] =
       "XXX.XXX.",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XXX..",
       "..XX....",
       "...XX...",
@@ -1080,7 +1080,7 @@ static const char *font[][11] =
       ".XXXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       ".XXXXXX.",
@@ -1090,7 +1090,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".....XX.",
       "....XX..",
       ".XXXXXX.",
@@ -1100,7 +1100,7 @@ static const char *font[][11] =
       ".XX.....",
       "XX......"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.....",
       "XX......",
@@ -1110,7 +1110,7 @@ static const char *font[][11] =
       "..XXX...",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXXX...",
       "XX..XX..",
       "XX..XX..",
@@ -1120,7 +1120,7 @@ static const char *font[][11] =
       "XX..XX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "XXXXXX..",
       "........",
@@ -1130,7 +1130,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX....",
       "..XX....",
       "XXXXXX..",
@@ -1140,7 +1140,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XX.....",
       "..XX....",
       "...XX...",
@@ -1150,7 +1150,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "..XX....",
       ".XX.....",
@@ -1160,7 +1160,7 @@ static const char *font[][11] =
       "XXXXXX..",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "....XXX.",
       "...XX.XX",
       "...XX.XX",
@@ -1170,7 +1170,7 @@ static const char *font[][11] =
       "...XX...",
       "...XX..."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "...XX...",
       "...XX...",
       "...XX...",
@@ -1180,7 +1180,7 @@ static const char *font[][11] =
       "XX.XX...",
       ".XXX...."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XX....",
       "..XX....",
       "........",
@@ -1190,7 +1190,7 @@ static const char *font[][11] =
       "..XX....",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       ".XXX.XX.",
       "XX.XXX..",
@@ -1200,7 +1200,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "..XXX...",
       ".XX.XX..",
       ".XX.XX..",
@@ -1210,7 +1210,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -1220,7 +1220,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
@@ -1230,7 +1230,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "....XXXX",
       "....XX..",
       "....XX..",
@@ -1240,7 +1240,7 @@ static const char *font[][11] =
       "..XXXX..",
       "...XXX.."
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXXX...",
       ".XX.XX..",
       ".XX.XX..",
@@ -1250,7 +1250,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       ".XXX....",
       "...XX...",
       "..XX....",
@@ -1260,7 +1260,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "..XXXX..",
@@ -1270,7 +1270,7 @@ static const char *font[][11] =
       "........",
       "........"
     },
-    { "8 8 2 1", "X c white", ". c blue",
+    { "8 8 2 1", "X c green", ". c black",
       "........",
       "........",
       "........",
