@@ -67,7 +67,12 @@ Game::Game(const char *map, GameDisplay *display) :
 	{
         catalog[i]=new SpringyGameElement(i);
 	}
-
+	
+	if(int i=128+2)
+	{
+        catalog[i]=new GameElement();
+	}
+	
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
         levels.push_back(GameLevel(rows, columns, page.get(), catalog));
