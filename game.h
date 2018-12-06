@@ -93,6 +93,16 @@ class SolidGameElement : public ActiveGameElement
     virtual bool isSolid() { return true; }
 };
 
+class Ladder : public ActiveGameElement
+{ public:
+	
+	Ladder(const chtype name) : ActiveGameElement(name) {}
+	
+	virtual ~Ladder(){}
+	
+	virtual bool isClimbable(){ return true; }
+};
+
 /* Class for elements that can move around. */
 class GameAgent : public ActiveGameElement
 { protected:

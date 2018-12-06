@@ -47,11 +47,14 @@ Game::Game(const char *map, GameDisplay *display) :
     for(int i=128+2; i<128+51; i++)
         catalog[i]=new GameElement(i);
         
-    for(int i=128+51; i<128+91; i++)
+    for(int i=128+30; i<128+91; i++)
         catalog[i]=new SolidGameElement(i);
         
     for(int i=128+91; i<128+128; i++)
         catalog[i]=new GameElement(i);
+		
+	for(int i=128+1 ; i<128+30 ; i++)
+		catalog[i] = new Ladder(i);
 
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
