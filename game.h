@@ -128,6 +128,7 @@ class Present : public ActiveGameElement
 	// Clean up but there is nothing to do.
 	virtual ~Present(){}
 	// Override the ActiveGameElement to make this kind laddery.
+	//addScore(100);
 	virtual bool isPresent(){ return true; }
 };
 
@@ -243,6 +244,8 @@ public:
     
 class Worm;
         
+class Ball;		
+		
 /* Class for the whole game.
  * TODO: Move the level into its own class, so that we can support
  *       multiple levels.
@@ -256,6 +259,7 @@ class Game
 
     unsigned rows, columns, // The size of the map.
              startRow, startCol, // The starting location of Willy
+			 startRow2, startCol2,
              bonus, // The timer that counts down the bonus.
 	                // Timer units does not match what is on the display.
              current_level=3; // The level that is currently active.
@@ -283,7 +287,7 @@ class Game
 
     Command command; // The command that is in effect for this turn.
     Worm *willy; // A reference for the main character.
-
+	Ball *newball;
     // Check if row and column are inside the map.
     // Note that if row or column is negative, it will become
     // huge when cast to an unsigned, and so will be correctly
@@ -398,7 +402,7 @@ class Game
     // Get the current value of the bonus, which is different from the 
     // value of the bonus counter.
     // This can be used to get the number of bonus points to pass to 
-    // willy->addScore() when the level is completed.
+    // willy->addScore() when the level is completed. ////////////////////////IMPORTANT//////////////////////
     // It is also used to construct the status line.
     int getBonus();
 

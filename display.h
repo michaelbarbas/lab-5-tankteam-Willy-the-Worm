@@ -23,7 +23,7 @@
 
 class Game;
 typedef unsigned char chtype;
-enum Command { STOP, LEFT, RIGHT, UP, DOWN, JUMP, DIE, QUIT,
+enum Command { STOP, STOP2, LEFT, LEFT2, RIGHT, RIGHT2, UP, UP2, DOWN2, DOWN, JUMP, JUMP2, DIE, QUIT,
                NUMCOMMANDS};
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +114,14 @@ class GameDisplay : public MainFrameBase
 		virtual void onGoRight( wxCommandEvent& event ) { newCommand=RIGHT; }
 		virtual void onGoJump( wxCommandEvent& event ) { newCommand=JUMP; }
 		virtual void onGoStop( wxCommandEvent& event ) { newCommand=STOP; }
+		
+		virtual void onGoUp2( wxCommandEvent& event ) { newCommand=UP2; }				//
+		virtual void onGoDown2( wxCommandEvent& event ) { newCommand=DOWN2; }			//
+		virtual void onGoLeft2( wxCommandEvent& event ) { newCommand=LEFT2; }			// New commands for Second Player
+		virtual void onGoRight2( wxCommandEvent& event ) { newCommand=RIGHT2; }			// 
+		virtual void onGoJump2( wxCommandEvent& event ) { newCommand=JUMP2; }			//
+		virtual void onGoStop2( wxCommandEvent& event ) { newCommand=STOP2; }			//
+		
         virtual void onKeyDown( wxKeyEvent& event );
         virtual void onPaint( wxPaintEvent& event );
         virtual void onResize( wxSizeEvent& event ) { corner_column=corner_row=0; needrefresh=true; m_panel1->Refresh(); }

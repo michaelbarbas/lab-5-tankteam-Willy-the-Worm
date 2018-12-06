@@ -61,6 +61,13 @@ class MainFrameBase : public wxFrame
 		virtual void onGoLeft( wxCommandEvent& event ) { event.Skip(); }
 		virtual void onGoRight( wxCommandEvent& event ) { event.Skip(); }
 		virtual void onGoJump( wxCommandEvent& event ) { event.Skip(); }
+		
+		virtual void onGoUp2( wxCommandEvent& event ) { event.Skip(); }			//
+		virtual void onGoDown2( wxCommandEvent& event ) { event.Skip(); }		//
+		virtual void onGoLeft2( wxCommandEvent& event ) { event.Skip(); }		// New event handler for worm2
+		virtual void onGoRight2( wxCommandEvent& event ) { event.Skip(); }		//
+		virtual void onGoJump2( wxCommandEvent& event ) { event.Skip(); }		//
+		
 		virtual void onGoStop( wxCommandEvent& event ) { event.Skip(); }
 		virtual void onPaint( wxPaintEvent& event ) { event.Skip(); }
 		virtual void onResize( wxSizeEvent& event ) { event.Skip(); }

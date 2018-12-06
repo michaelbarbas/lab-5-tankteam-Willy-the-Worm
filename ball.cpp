@@ -5,12 +5,12 @@
 
 using namespace std;
 
-/*oid Worm::gainLife()
+void Ball::gainLife()
 { lives++;
   // TODO: Alert the user of the new life.
 }
 
-void Worm::die(Game *game)
+void Ball::die(Game *game)
 { if(lives==0)
     alive=false;
   else
@@ -21,7 +21,7 @@ void Worm::die(Game *game)
   game->reset();
 }
 
-void Worm::addScore(Game *game, int points)
+void Ball::addScore(Game *game, int points)
 { if(points>=0 || score>=(unsigned)-points)
     score+=points;
   else
@@ -35,9 +35,9 @@ void Worm::addScore(Game *game, int points)
   { residual-=3000;
     gainLife();
   }
-}*/
+}
 
-/*bool Ball::clock(Game *game)
+bool Ball::clock(Game *game)
 { unsigned oldX=x,
            oldY=y;
   bool moved=false;
@@ -47,32 +47,32 @@ void Worm::addScore(Game *game, int points)
     return false;
 
   // Check for anything active where we were.
-  //checkin(game);
-  //if(jumpstate==7) jumpstate=6;
+  checkin(game);
+  if(jumpstate==7) jumpstate=6;
 
   // Are we falling?
-  //if(!jumpstate && !game->hasClimbable(this, (int)y, (int)x)
-  //   && !game->hasSolid(this, (int)y+1, (int)x))
-  //  y++;
-  //else
+  if(!jumpstate && !game->hasClimbable(this, (int)y, (int)x)
+     && !game->hasSolid(this, (int)y+1, (int)x))
+    y++;
+  else
     // Can we legally carry out the command?
-   // if(!ifLegal(game,game->getCommand()))
-   //   if(!ifLegal(game,dir))
-    //    ifLegal(game,STOP);
+    if(!ifLegal(game,game->getCommand()))
+      if(!ifLegal(game,dir))
+        ifLegal(game,STOP);
 
   // Check for anything active where we are.
-  /if(oldX!=x || oldY!=y)
-  //{ checkout(game, oldX!=x && oldY==y, oldX);
-  //  moved=true;
-  //}
+  if(oldX!=x || oldY!=y)
+  { checkout(game, oldX!=x && oldY==y, oldX);
+    moved=true;
+  }
 
-  //if(jumpstate) jumpstate--;
+  if(jumpstate) jumpstate--;
 
   return moved;
-}*/
+}
 
 /* Check to see if there is anything active at our location. */
-/*void Ball::checkin(Game *game)
+void Ball::checkin(Game *game)
 { game->touch(this);
 
   if(game->hasSpringy(this, y, x))
@@ -85,7 +85,6 @@ void Worm::addScore(Game *game, int points)
       game->setCommand(STOP);
     }
 }
-*/
 
 /* Check to see if there is anything active at our location. */
 void Ball::checkout(Game *game, bool stepOff, unsigned oldX)
@@ -184,7 +183,7 @@ bool Ball::ifLegal(Game *game, Command command)
   }
 }
 
-/*string Ball::getStatus()
+string Ball::getStatus()
 { ostringstream statline;
 
   statline << "Balls ";
@@ -199,4 +198,3 @@ bool Ball::ifLegal(Game *game, Command command)
   statline << "  Score " << score << "  ";
   return statline.str();
 }
-*/

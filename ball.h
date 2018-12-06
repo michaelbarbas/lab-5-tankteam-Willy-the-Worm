@@ -1,7 +1,7 @@
 #include "game.h"
 
-#ifndef WILLY_H
-#define WILLY_H
+#ifndef BALL_H
+#define BALL_H
 
 /* This is the implementation of a Ball agent. */
 class Ball : public GameAgent

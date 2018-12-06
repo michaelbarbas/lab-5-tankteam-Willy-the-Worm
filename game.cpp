@@ -40,13 +40,17 @@ Game::Game(const char *map, GameDisplay *display) :
     init();
 
     for(int i=0; i<128; i++)
+	{
         catalog[i]=new GameElement(i);
-
+	}
+	
     catalog[128+0]=new GameElement(128+127);
     catalog[128+1]=new GameElement(128+127);
     
     for(int i=128+2; i<128+51; i++)
+	{
         catalog[i]=new GameElement(i);
+	}
 	
     for(int i=128+51; i<128+91; i++)
 	{
@@ -122,9 +126,13 @@ bool Game::clock()
 
   if(bonus--==0)
   { y=willy->getRow();
+	y2=newball->getRow();
     x=willy->getCol();
+	x2=newball->getCol();
     willy->die(this);
+	newball->die(this);
     LEVEL(willy->getRow(), willy->getCol()).push_back(willy);
+	LEVEL(newball->getRow(), newball->getCol()).push_back(willy);
     LEVEL(y, x).remove(willy);
     willy->draw(display);
     LEVEL(y, x).back()->draw(display, y, x);
@@ -144,9 +152,11 @@ bool Game::clock()
   }
 
   display->center(willy->getRow(), willy->getCol(), 10, 1);
+  display->center(newball->getRow(), newball->getCol(), 10, 1);
   showStatus();
   display->clock(this);
   return willy->isAlive();
+  return newball->isAlive();
 }
 
 void Game::showStatus()
@@ -158,6 +168,7 @@ void Game::showStatus()
   statline.width(1);
   statline << "  ";
   statline << willy->getStatus();
+  statline << newball->getStatus();
   display->writeAt(rows, 0, statline.str());
 }
 
@@ -229,6 +240,7 @@ bool Game::hasPresent(GameAgent *agent, int row, int col)
   for(list<GameElement *>::iterator i=e.begin(); i!=e.end(); i++)
     if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i))
        && a->isPresent())
+	  
       return true;
 
   return false;
@@ -239,10 +251,11 @@ void Game::switchLevel(int new_level)
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
-	//startRow2=l.getBallRow();
+	startRow2=l.getBallRow();
     startCol=l.getWormColumn();
-	//startCol2=l.getBallColumn();
+	startCol2=l.getBallColumn();
     willy=new Worm(128, startRow, startCol);
+	newball=new Ball(128+7, startRow2, startCol2+10);
     //ball=new Balls(150, startRow2, startCol2);
     for(GameElement *elem: agents)
         delete(elem);
@@ -250,6 +263,7 @@ void Game::switchLevel(int new_level)
 	
 	//agents.push_back(ball);
     agents.push_back(willy);
+	agents.push_back(newball);
 
     for(unsigned i=0; i<rows*columns; i++)
     {   unsigned r,c;
@@ -261,8 +275,11 @@ void Game::switchLevel(int new_level)
     }
     
     level[l.getIndex(startRow, startCol)].push_back(willy);
+	level[l.getIndex(startRow2, startCol2)].push_back(newball);
     willy->draw(display);
+	newball->draw(display);
     display->center(startRow, startCol, 10, 1);
+	display->center(startRow2, startCol2, 10, 1);
 }
 
 void Game::touch(GameAgent *agent)
