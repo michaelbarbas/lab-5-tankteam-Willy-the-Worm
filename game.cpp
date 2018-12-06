@@ -58,12 +58,12 @@ Game::Game(const char *map, GameDisplay *display) :
         catalog[i]=new GameElement(i);
 	}
 	
-	if(int i=128+3)
+	if(int i=128+3) //128+3 corrisponds to the ladder element in file willychr.h
 	{
 		catalog[i] = new Ladder(i);
 	}
 	
-	if(int i=128+5)
+	if(int i=128+5) //128+5 corrisponds to the spring element in file willychr.h
 	{
         catalog[i]=new SpringyGameElement(i);
 	}
