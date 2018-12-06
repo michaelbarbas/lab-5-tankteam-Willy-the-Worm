@@ -93,6 +93,7 @@ class SolidGameElement : public ActiveGameElement
     virtual bool isSolid() { return true; }
 };
 
+/* Elements that springs you when you walk on it. */
 class SpringyGameElement : public ActiveGameElement
 { public:
     /* Create a game element that displays character name. */
@@ -101,16 +102,18 @@ class SpringyGameElement : public ActiveGameElement
     // Clean up but there is nothing to do.
     virtual ~SpringyGameElement() {}
 	
+	// Override the ActiveGameElement to make this kind springy.
 	virtual bool isSpringy(){ return true; }
 };
 
+/* Elements that allows you to walk up or down to get to new levels */
 class Ladder : public ActiveGameElement
 { public:
-	
+	/* Create a game element that displays character name. */
 	Ladder(const chtype name) : ActiveGameElement(name) {}
-	
+	// Clean up but there is nothing to do.
 	virtual ~Ladder(){}
-	
+	// Override the ActiveGameElement to make this kind laddery.
 	virtual bool isClimbable(){ return true; }
 };
 

@@ -22,7 +22,7 @@ using namespace std;
 #endif
 
 #ifndef FRAMELEN
-#define FRAMELEN (1500000000/BONUSFRAMES)
+#define FRAMELEN (1500000/BONUSFRAMES)
 #endif
 
 
