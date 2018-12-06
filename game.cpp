@@ -134,8 +134,11 @@ bool Game::clock()
     LEVEL(willy->getRow(), willy->getCol()).push_back(willy);
 	LEVEL(newball->getRow(), newball->getCol()).push_back(willy);
     LEVEL(y, x).remove(willy);
+	LEVEL(y2, x2).remove(newball);
     willy->draw(display);
+	newball->draw(display);
     LEVEL(y, x).back()->draw(display, y, x);
+	LEVEL(y2, x2).back()->draw(display, y2, x2);
   }
 
   for(list<GameAgent *>::iterator i=agents.begin();
@@ -143,11 +146,15 @@ bool Game::clock()
       i++)
   { y=(*i)->getRow();
     x=(*i)->getCol();
+	y2=(*i)->getRow();
+    x2=(*i)->getCol();
     if((*i)->clock(this))
     { LEVEL((*i)->getRow(), (*i)->getCol()).push_back(*i);
       LEVEL(y, x).remove(*i);
+	  LEVEL(y2, x2).remove(*i);
       (*i)->draw(display);
       LEVEL(y, x).back()->draw(display, y, x);
+	  LEVEL(y2, x2).back()->draw(display, y2, x2);
     }
   }
 
