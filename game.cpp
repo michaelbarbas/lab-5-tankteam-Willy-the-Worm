@@ -66,12 +66,12 @@ Game::Game(const char *map, GameDisplay *display) :
 	if(int i=128+5) //128+5 corrisponds to the spring element in file willychr.h
 	{
         catalog[i]=new SpringyGameElement(i);
-	}
+	} //Cheers with great gusto!!!
 	
 	if(int i=128+2)
 	{
-        catalog[i]=new GameElement();
-	}
+        catalog[i]=new Present(i); //Removes all presents from game. Willy has been bad this year.
+	};
 	
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
@@ -205,7 +205,7 @@ bool Game::hasClimbable(GameAgent *agent, int row, int col)
 
   return false;
 }
-  
+
 void Game::stepOff(GameAgent *agent, int col)
 { unsigned row=agent->getRow()+1;
   ActiveGameElement *a;
@@ -218,7 +218,21 @@ void Game::stepOff(GameAgent *agent, int col)
     if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i)))
       a->stepOff(this, agent);
 }
-  
+
+bool Game::hasPresent(GameAgent *agent, int row, int col)
+{ ActiveGameElement *a;
+
+  if(!valid(row,col)) return false;
+
+  list<GameElement *> &e=LEVEL(row, col);
+
+  for(list<GameElement *>::iterator i=e.begin(); i!=e.end(); i++)
+    if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i))
+       && a->isPresent())
+      return true;
+
+  return false;
+}
 
 void Game::switchLevel(int new_level)
 {   //if(levels) return;
@@ -340,4 +354,4 @@ int main(int argc, char *argv[])
   game->start();
   delete(game);
 }
-/*/
+*/

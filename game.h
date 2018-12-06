@@ -57,7 +57,10 @@ class ActiveGameElement : public GameElement
 
     /* Test if this element can be climbed on. */
     virtual bool isClimbable() { return false; }
-
+	
+	/* Test if this element can be climbed on. */
+    virtual bool isPresent() { return false; }
+	
     /* Callback if an agent steps off this element.
      * Input:
      *   game: a reference to the game
@@ -117,7 +120,16 @@ class Ladder : public ActiveGameElement
 	virtual bool isClimbable(){ return true; }
 };
 
-
+/* Present that gives score and disapears */
+class Present : public ActiveGameElement
+{ public:
+	/* Create a game element that displays character name. */
+	Present(const chtype name) : ActiveGameElement(name) {}
+	// Clean up but there is nothing to do.
+	virtual ~Present(){}
+	// Override the ActiveGameElement to make this kind laddery.
+	virtual bool isPresent(){ return true; }
+};
 
 /* Class for elements that can move around. */
 class GameAgent : public ActiveGameElement
@@ -154,8 +166,8 @@ class GameAgent : public ActiveGameElement
      *   game: a reference to the game.
      *   points: the amount of adjustment (positive or negative).
      */
-    virtual void addScore(Game *game, int points) {}
-
+    virtual void addScore(Game * game, int points) {}
+	
     /* Get a string that can be displayed as part of the status line. */
     virtual std::string getStatus() { return alive?"Alive":"Dead"; }
 
@@ -246,7 +258,7 @@ class Game
              startRow, startCol, // The starting location of Willy
              bonus, // The timer that counts down the bonus.
 	                // Timer units does not match what is on the display.
-             current_level=0; // The level that is currently active.
+             current_level=3; // The level that is currently active.
 
     /* level is an array of lists of game elements, one list for each
      * location in the map. The list stores all of the game elements that
@@ -347,10 +359,15 @@ class Game
     bool hasSpringy(GameAgent *agent, int row, int col);
 
     // Find out if there is anything climbable at the specified location.
-    // It doesn't count if the only thing climbable as this location is
+    // It doesn't count if the only thing climbable at this location is
     // the agent itself.
     bool hasClimbable(GameAgent *agent, int row, int col);
     
+	// Find out if there is a Present at the specified location.
+    // It doesn't count if the only that's a Present at this location is
+    // the agent itself.
+    bool hasPresent(GameAgent *agent, int row, int col);
+	
     // Callback that the agent uses to report it stepped off the specified
     // column.
     void stepOff(GameAgent *agent, int col);
