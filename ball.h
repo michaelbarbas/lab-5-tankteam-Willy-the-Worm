@@ -59,17 +59,17 @@ class Ball : public GameAgent
     // restaring the bonus counter and moving the Ball to the start
     // locaton.
     virtual void die(Game *game);
-
+	
     // This is not terribly useful, but if we had multiple Balls it
     // would allow them to climb on each other.
     virtual bool isClimbable() { return true; }
 
     // Adjust our score. If we would go negative, we set the score to 0 and
     // the Ball dies.
-    virtual void addScore(Game *game, int points);
-
+    //virtual void addScore(Game *game, int points);
+	
     // Report back a string with the current score and number of lives.
     // The game displays this on the status line.
-    virtual std::string getStatus();
+    //virtual std::string getStatus();
 };
 #endif

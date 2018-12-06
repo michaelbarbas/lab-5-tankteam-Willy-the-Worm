@@ -120,7 +120,7 @@ class Ladder : public ActiveGameElement
 	virtual bool isClimbable(){ return true; }
 };
 
-/* Present that gives score and disapears */
+/* Present that gives score and then disapears */
 class Present : public ActiveGameElement
 { public:
 	/* Create a game element that displays character name. */
@@ -187,7 +187,7 @@ class GameAgent : public ActiveGameElement
 class GameLevel
 {
 private:
-    unsigned rows, columns, worm_row=0, worm_column=0, ball_row=0, ball_column=0;
+    unsigned rows, columns, worm_row=0, worm_column=0, ball_row=20, ball_column=0;
     std::unique_ptr<GameElement*[]> elements;
 
 public:
@@ -259,10 +259,10 @@ class Game
 
     unsigned rows, columns, // The size of the map.
              startRow, startCol, // The starting location of Willy
-			 startRow2, startCol2,
+			 //startRow2, startCol2,
              bonus, // The timer that counts down the bonus.
 	                // Timer units does not match what is on the display.
-             current_level=3; // The level that is currently active.
+             current_level=0; // The level that is currently active.
 
     /* level is an array of lists of game elements, one list for each
      * location in the map. The list stores all of the game elements that

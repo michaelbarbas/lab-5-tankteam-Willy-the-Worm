@@ -20,7 +20,7 @@ void Ball::die(Game *game)
   y=startRow;
   game->reset();
 }
-
+/*
 void Ball::addScore(Game *game, int points)
 { if(points>=0 || score>=(unsigned)-points)
     score+=points;
@@ -36,7 +36,7 @@ void Ball::addScore(Game *game, int points)
     gainLife();
   }
 }
-
+//*/
 bool Ball::clock(Game *game)
 { unsigned oldX=x,
            oldY=y;
@@ -123,7 +123,7 @@ bool Ball::ifLegal(Game *game, Command command)
     if(ideal>(int)y) nextY++;
     else if(ideal<(int)y) nextY--;
   }
-  
+
   // Check 
     
   switch(command)
@@ -182,10 +182,10 @@ bool Ball::ifLegal(Game *game, Command command)
       return false;
   }
 }
-
+/*
 string Ball::getStatus()
 { ostringstream statline;
-
+	
   statline << "Balls ";
   if(lives<6)
   { for(unsigned i=0; i<lives; i++)  
@@ -198,3 +198,4 @@ string Ball::getStatus()
   statline << "  Score " << score << "  ";
   return statline.str();
 }
+//*/

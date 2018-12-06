@@ -74,7 +74,7 @@ Game::Game(const char *map, GameDisplay *display) :
 	
 	if(int i=128+2)
 	{
-        catalog[i]=new Present(i); //Removes all presents from game. Willy has been bad this year.
+        catalog[i]=new Present(i); //Adds functionless Presents to game
 	};
 	
     // Read the level from the file.
@@ -88,7 +88,7 @@ Game::Game(const char *map, GameDisplay *display) :
 	}
     level.reset(new std::list<GameElement *>[rows*columns]);
     display->setGame(this, rows, columns);
-    switchLevel(0);
+    switchLevel(2); // Changes the level in game.
 
     reset();
     showStatus();
@@ -115,7 +115,7 @@ int Game::getBonus()
 }
 
 bool Game::clock()
-{ int y, x;
+{ int y, x, y2, x2;
   
   command=display->getCommand();
 
@@ -240,7 +240,8 @@ bool Game::hasPresent(GameAgent *agent, int row, int col)
   for(list<GameElement *>::iterator i=e.begin(); i!=e.end(); i++)
     if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i))
        && a->isPresent())
-	  
+	  //add 100 point here
+	  //replave with blank
       return true;
 
   return false;
@@ -251,11 +252,12 @@ void Game::switchLevel(int new_level)
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
-	startRow2=l.getBallRow();
+	startRow=l.getBallRow();
     startCol=l.getWormColumn();
-	startCol2=l.getBallColumn();
+	startCol=l.getBallColumn();
     willy=new Worm(128, startRow, startCol);
-	newball=new Ball(128+7, startRow2, startCol2+10);
+	newball=new Ball(128+7, startRow+10, startCol+5);
+	//newball=new Ball(128+7, startRow2, startCol2+10);
     //ball=new Balls(150, startRow2, startCol2);
     for(GameElement *elem: agents)
         delete(elem);
@@ -275,11 +277,11 @@ void Game::switchLevel(int new_level)
     }
     
     level[l.getIndex(startRow, startCol)].push_back(willy);
-	level[l.getIndex(startRow2, startCol2)].push_back(newball);
+	level[l.getIndex(startRow, startCol)].push_back(newball);
     willy->draw(display);
 	newball->draw(display);
     display->center(startRow, startCol, 10, 1);
-	display->center(startRow2, startCol2, 10, 1);
+	display->center(startRow, startCol, 10, 1);
 }
 
 void Game::touch(GameAgent *agent)
