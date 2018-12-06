@@ -23,7 +23,7 @@ using namespace std;
 #endif
 
 #ifndef FRAMELEN
-#define FRAMELEN (1500000/BONUSFRAMES)
+#define FRAMELEN (1500000000/BONUSFRAMES)
 #endif
 
 
@@ -47,30 +47,26 @@ Game::Game(const char *map, GameDisplay *display) :
     
     for(int i=128+2; i<128+51; i++)
         catalog[i]=new GameElement(i);
-
-        
-    for(int i=128+30; i<128+91; i++)
-
 	
     for(int i=128+51; i<128+91; i++)
 	{
         catalog[i]=new SolidGameElement(i);
     }
-
+	
     for(int i=128+91; i<128+128; i++)
 	{
         catalog[i]=new GameElement(i);
 	}
-		
-	for(int i=128+1 ; i<128+30 ; i++)
+	
+	if(int i=128+3)
 	{
 		catalog[i] = new Ladder(i);
 	}
 	
-	//for(int i=128+5; i<128+10; i++)
-	//{
-    //    catalog[i]=new SpringyGameElement(i);
-	//}
+	if(int i=128+5)
+	{
+        catalog[i]=new SpringyGameElement(i);
+	}
 
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
@@ -79,7 +75,7 @@ Game::Game(const char *map, GameDisplay *display) :
     for(unsigned l=0; l<levels.size(); l++)
 	{
         levels[l].setWorm(page[2*l+1]-1,page[2*l]-1);
-		levels[l].setBall(page[2*l+1]-1,page[2*l]-1);
+		//levels[l].setBall(page[2*l+1]-1,page[2*l]-1);
 	}
     level.reset(new std::list<GameElement *>[rows*columns]);
     display->setGame(this, rows, columns);
@@ -224,9 +220,9 @@ void Game::switchLevel(int new_level)
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
-	startRow2=l.getBallRow();
+	//startRow2=l.getBallRow();
     startCol=l.getWormColumn();
-	startCol2=l.getBallColumn();
+	//startCol2=l.getBallColumn();
     willy=new Worm(128, startRow, startCol);
     //ball=new Balls(150, startRow2, startCol2);
     for(GameElement *elem: agents)
