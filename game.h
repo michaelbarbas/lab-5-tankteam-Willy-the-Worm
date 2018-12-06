@@ -93,6 +93,17 @@ class SolidGameElement : public ActiveGameElement
     virtual bool isSolid() { return true; }
 };
 
+class SpringyGameElement : public ActiveGameElement
+{ public:
+    /* Create a game element that displays character name. */
+    SpringyGameElement(const chtype name) : ActiveGameElement(name) {}
+
+    // Clean up but there is nothing to do.
+    virtual ~SpringyGameElement() {}
+	
+	virtual bool isSpringy(){ return true; }
+};
+
 class Ladder : public ActiveGameElement
 { public:
 	
@@ -102,6 +113,8 @@ class Ladder : public ActiveGameElement
 	
 	virtual bool isClimbable(){ return true; }
 };
+
+
 
 /* Class for elements that can move around. */
 class GameAgent : public ActiveGameElement
@@ -334,7 +347,7 @@ class Game
     // It doesn't count if the only thing climbable as this location is
     // the agent itself.
     bool hasClimbable(GameAgent *agent, int row, int col);
-
+    
     // Callback that the agent uses to report it stepped off the specified
     // column.
     void stepOff(GameAgent *agent, int col);
