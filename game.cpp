@@ -11,6 +11,7 @@
 
 #include "game.h"
 #include "worm.h"
+#include "ball.h"
 
 using namespace std;
 
@@ -64,20 +65,22 @@ Game::Game(const char *map, GameDisplay *display) :
 	for(int i=128+1 ; i<128+30 ; i++)
 	{
 		catalog[i] = new Ladder(i);
-		
 	}
-	for(int i=128+5; i<128+10; i++)
-	{
-        catalog[i]=new SpringyGameElement(i);
-	}
+	
+	//for(int i=128+5; i<128+10; i++)
+	//{
+    //    catalog[i]=new SpringyGameElement(i);
+	//}
 
     // Read the level from the file.
     while(file.read(page.get(), rows*columns))
         levels.push_back(GameLevel(rows, columns, page.get(), catalog));
 
     for(unsigned l=0; l<levels.size(); l++)
+	{
         levels[l].setWorm(page[2*l+1]-1,page[2*l]-1);
-        
+		levels[l].setBall(page[2*l+1]-1,page[2*l]-1);
+	}
     level.reset(new std::list<GameElement *>[rows*columns]);
     display->setGame(this, rows, columns);
     switchLevel(0);
@@ -221,13 +224,16 @@ void Game::switchLevel(int new_level)
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
+	startRow2=l.getBallRow();
     startCol=l.getWormColumn();
+	startCol2=l.getBallColumn();
     willy=new Worm(128, startRow, startCol);
-    
+    //ball=new Balls(150, startRow2, startCol2);
     for(GameElement *elem: agents)
         delete(elem);
     agents.clear();
-
+	
+	//agents.push_back(ball);
     agents.push_back(willy);
 
     for(unsigned i=0; i<rows*columns; i++)
