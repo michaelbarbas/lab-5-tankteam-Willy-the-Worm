@@ -88,6 +88,7 @@ void Worm::checkin(Game *game)
 	  {
 		jumpstate=0;
 		this->addScore(game, 100);
+		//this->replace(y, x, game, 128+127);
 	  }
 }
 

@@ -255,13 +255,14 @@ bool Game::hasPresent(GameAgent *agent, int row, int col)
 	  //add 100 point here
 	  //replave with blank
 	  
-	  replace(row, col, a, 128+128);
+	  replace(row, col, agent, 128+127);
       return true;
 	}
 	
 
 	return false;
   }
+  return 0;
 }
 
 void Game::switchLevel(int new_level)
