@@ -1,0 +1,17 @@
+Devise a strategy. What do you need to do to the code to add your feature? Pretend that you have one chance to get this right. (5 points)
+
+
+* While Committing after each step
+* And while Adding comments after each step
+* Duplicate code for isSolid and hasSolid and rename to isPresent and hasPresent
+* Turn generic GameElements into Presents
+* Add functionality in Worm so that when Willy goes over Present it gives him 100 points
+* Add functionality so that it also removes the present element from the game by replacing it with a blank space.
+* If Steps complete “Cheer with great gusto!!”  
+
+
+Divide the solution up into stages. What is the smallest change you can make that moves towards your goal while not changing very much? How can you test that change and make sure it works correctly? You should get a series of toddler steps that go from the current code to having your feature added. (5 points)
+
+
+* Smallest change was adding score without removing present
+* Test by walking over the present if points added then success
