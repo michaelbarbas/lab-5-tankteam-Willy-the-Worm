@@ -144,6 +144,7 @@ bool Worm::ifLegal(Game *game, Command command)
       { dir=command;
         y=nextY;
 	x++;
+	//
 	return true;
       }
       return false;
