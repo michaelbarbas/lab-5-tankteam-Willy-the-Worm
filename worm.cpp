@@ -76,19 +76,18 @@ bool Worm::clock(Game *game)
 void Worm::checkin(Game *game)
 { game->touch(this);
 
-  if(game->hasSpringy(this, y, x))
+  if(game->hasSpringy(this, y, x)) // If Willy toutches a spring cause him to spring
   { jumpstate=7;
     jumpbase=y;
   } else
-    if(game->hasClimbable(this, y, x) && jumpstate)
+    if(game->hasClimbable(this, y, x) && jumpstate) // If Willy jumps onto ladder make his stop there
     { jumpstate=0;
       dir=STOP;
       game->setCommand(STOP);
-    } else if(game->hasPresent(this,y,x))
+    } else if(game->hasPresent(this,y,x)) //If Willy toutches Present do this:
 	  {
 		jumpstate=0;
-		this->addScore(game, 100);
-		//this->replace(y, x, game, 128+127);
+		this->addScore(game, 100); //Adds score when Willy goes over a Present
 	  }
 }
 
@@ -134,8 +133,6 @@ bool Worm::ifLegal(Game *game, Command command)
     
   switch(command)
   { case LEFT:
-  
-  
       if(!game->hasSolid(this, nextY, (int)x-1))
       { dir=command;
         y=nextY;
