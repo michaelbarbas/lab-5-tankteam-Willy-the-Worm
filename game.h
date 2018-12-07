@@ -187,7 +187,7 @@ class GameAgent : public ActiveGameElement
 class GameLevel
 {
 private:
-    unsigned rows, columns, worm_row=0, worm_column=0, ball_row=20, ball_column=0;
+    unsigned rows, columns, worm_row=0, worm_column=0; //ball_row=20, ball_column=0;
     std::unique_ptr<GameElement*[]> elements;
 
 public:
@@ -195,7 +195,7 @@ public:
         rows(rows), columns(columns)
     {   unsigned len=rows*columns;
         elements.reset(new GameElement*[len]);
-        bool have_worm=false, have_ball=false;
+        bool have_worm=false;//, have_ball=false;
     
         for(unsigned i=0; i<len; i++)
         {   unsigned char c=level[i];
@@ -205,10 +205,10 @@ public:
                 getIndex(i, worm_row, worm_column);
             }
                 
-            if(!have_ball&&c==128+126)
+            /*if(!have_ball&&c==128+126)   //Ball functionality
             {   have_ball=true;
                 getIndex(i, ball_row, ball_column);
-            }
+            }*/
             
             elements[i]=catalog[c];
         }
@@ -238,13 +238,13 @@ public:
     inline unsigned getColumns() { return columns; }
     inline unsigned getWormRow() { return worm_row; }
     inline unsigned getWormColumn() { return worm_column; }
-    inline unsigned getBallRow() { return ball_row; }
-    inline unsigned getBallColumn() { return ball_column; }
+    //inline unsigned getBallRow() { return ball_row; }
+    //inline unsigned getBallColumn() { return ball_column; }
 };
     
 class Worm;
         
-class Ball;		
+//class Ball;		
 		
 /* Class for the whole game.
  * TODO: Move the level into its own class, so that we can support
@@ -287,7 +287,7 @@ class Game
 
     Command command; // The command that is in effect for this turn.
     Worm *willy; // A reference for the main character.
-	Ball *newball;
+	//Ball *newball;
     // Check if row and column are inside the map.
     // Note that if row or column is negative, it will become
     // huge when cast to an unsigned, and so will be correctly

@@ -11,7 +11,7 @@
 
 #include "game.h"
 #include "worm.h"
-#include "ball.h"
+//#include "ball.h"
 
 using namespace std;
 
@@ -88,7 +88,7 @@ Game::Game(const char *map, GameDisplay *display) :
 	}
     level.reset(new std::list<GameElement *>[rows*columns]);
     display->setGame(this, rows, columns);
-    switchLevel(2); // Changes the level in game.
+    switchLevel(0); // Changes the level in game.
 
     reset();
     showStatus();
@@ -115,7 +115,7 @@ int Game::getBonus()
 }
 
 bool Game::clock()
-{ int y, x, y2, x2;
+{ int y, x;
   
   command=display->getCommand();
 
@@ -126,19 +126,19 @@ bool Game::clock()
 
   if(bonus--==0)
   { y=willy->getRow();
-	y2=newball->getRow();
+	//y2=newball->getRow();   //Removed Ball functionality, may implement later
     x=willy->getCol();
-	x2=newball->getCol();
+	//x2=newball->getCol();  //Removed Ball functionality, may implement later
     willy->die(this);
-	newball->die(this);
+	//newball->die(this);   //Removed Ball functionality, may implement later
     LEVEL(willy->getRow(), willy->getCol()).push_back(willy);
-	LEVEL(newball->getRow(), newball->getCol()).push_back(willy);
+	//LEVEL(newball->getRow(), newball->getCol()).push_back(willy);   //Removed Ball functionality, may implement later
     LEVEL(y, x).remove(willy);
-	LEVEL(y2, x2).remove(newball);
+	//LEVEL(y2, x2).remove(newball);  //Removed Ball functionality, may implement later
     willy->draw(display);
-	newball->draw(display);
+	//newball->draw(display);   //Removed Ball functionality, may implement later
     LEVEL(y, x).back()->draw(display, y, x);
-	LEVEL(y2, x2).back()->draw(display, y2, x2);
+	//LEVEL(y2, x2).back()->draw(display, y2, x2);   //Removed Ball functionality, may implement later
   }
 
   for(list<GameAgent *>::iterator i=agents.begin();
@@ -146,24 +146,24 @@ bool Game::clock()
       i++)
   { y=(*i)->getRow();
     x=(*i)->getCol();
-	y2=(*i)->getRow();
-    x2=(*i)->getCol();
+	//y2=(*i)->getRow();
+    //x2=(*i)->getCol();
     if((*i)->clock(this))
     { LEVEL((*i)->getRow(), (*i)->getCol()).push_back(*i);
       LEVEL(y, x).remove(*i);
-	  LEVEL(y2, x2).remove(*i);
+	  //LEVEL(y2, x2).remove(*i);
       (*i)->draw(display);
       LEVEL(y, x).back()->draw(display, y, x);
-	  LEVEL(y2, x2).back()->draw(display, y2, x2);
+	  //LEVEL(y2, x2).back()->draw(display, y2, x2);
     }
   }
 
   display->center(willy->getRow(), willy->getCol(), 10, 1);
-  display->center(newball->getRow(), newball->getCol(), 10, 1);
+  //display->center(newball->getRow(), newball->getCol(), 10, 1);
   showStatus();
   display->clock(this);
   return willy->isAlive();
-  return newball->isAlive();
+  //return newball->isAlive();
 }
 
 void Game::showStatus()
@@ -175,7 +175,7 @@ void Game::showStatus()
   statline.width(1);
   statline << "  ";
   statline << willy->getStatus();
-  statline << newball->getStatus();
+  //statline << newball->getStatus();
   display->writeAt(rows, 0, statline.str());
 }
 
@@ -270,11 +270,11 @@ void Game::switchLevel(int new_level)
     current_level=new_level%levels.size();
     GameLevel &l=levels[current_level];
     startRow=l.getWormRow();
-	startRow=l.getBallRow();
+	//startRow=l.getBallRow();
     startCol=l.getWormColumn();
-	startCol=l.getBallColumn();
+	//startCol=l.getBallColumn();
     willy=new Worm(128, startRow, startCol);
-	newball=new Ball(128+7, startRow+10, startCol+5);
+	//newball=new Ball(128+7, startRow+10, startCol+5);
 	//newball=new Ball(128+7, startRow2, startCol2+10);
     //ball=new Balls(150, startRow2, startCol2);
     for(GameElement *elem: agents)
@@ -283,7 +283,7 @@ void Game::switchLevel(int new_level)
 	
 	//agents.push_back(ball);
     agents.push_back(willy);
-	agents.push_back(newball);
+	//agents.push_back(newball);
 
     for(unsigned i=0; i<rows*columns; i++)
     {   unsigned r,c;
@@ -295,11 +295,11 @@ void Game::switchLevel(int new_level)
     }
     
     level[l.getIndex(startRow, startCol)].push_back(willy);
-	level[l.getIndex(startRow, startCol)].push_back(newball);
+	//level[l.getIndex(startRow, startCol)].push_back(newball);
     willy->draw(display);
-	newball->draw(display);
+	//newball->draw(display);
     display->center(startRow, startCol, 10, 1);
-	display->center(startRow, startCol, 10, 1);
+	//display->center(startRow, startCol, 10, 1);
 }
 
 void Game::touch(GameAgent *agent)
