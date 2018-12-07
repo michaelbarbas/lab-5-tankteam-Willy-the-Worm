@@ -254,6 +254,8 @@ bool Game::hasPresent(GameAgent *agent, int row, int col)
 	  //willy->addScore(this, 100); //adds 100 points
 	  //add 100 point here
 	  //replave with blank
+	  
+	  replace(row, col, a, 128+128);
       return true;
 	}
 	
