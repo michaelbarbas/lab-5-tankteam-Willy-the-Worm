@@ -193,7 +193,10 @@ bool Game::hasSolid(GameAgent *agent, int row, int col)
 
   return false;
 }
-  
+
+/*
+ * create hasSpringy to ovveride isSpringy() so willy knows that the spring bounces him up in the air
+ */
 bool Game::hasSpringy(GameAgent *agent, int row, int col)
 { ActiveGameElement *a;
 
@@ -209,6 +212,9 @@ bool Game::hasSpringy(GameAgent *agent, int row, int col)
   return false;
 }
   
+/*
+ * create hasClimbable to ovveride isClimbable() so willy knows that there is a ladder
+ */
 bool Game::hasClimbable(GameAgent *agent, int row, int col)
 { ActiveGameElement *a;
 
@@ -236,6 +242,10 @@ void Game::stepOff(GameAgent *agent, int col)
     if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i)))
       a->stepOff(this, agent);
 }
+
+/*
+ * Check if hasPresent, again overrides, in this instance "isPresent()". Also removes the original present once willy touches with replace()
+ */
 
 bool Game::hasPresent(GameAgent *agent, int row, int col)
 { 
@@ -273,11 +283,13 @@ void Game::switchLevel(int new_level)
 	//startRow=l.getBallRow();
     startCol=l.getWormColumn();
 	//startCol=l.getBallColumn();
-    willy=new Worm(128, startRow, startCol);
+    willy=new Worm(128, startRow, startCol); //Create new Worm Willy
+	
 	//newball=new Ball(128+7, startRow+10, startCol+5);
-	//newball=new Ball(128+7, startRow2, startCol2+10);
+	//newball=new Ball(128+7, startRow2, startCol2+10); //IGNORE (MAY IMPLEMENT BALL)
     //ball=new Balls(150, startRow2, startCol2);
-    for(GameElement *elem: agents)
+    
+	for(GameElement *elem: agents)
         delete(elem);
     agents.clear();
 	
@@ -302,6 +314,10 @@ void Game::switchLevel(int new_level)
 	//display->center(startRow, startCol, 10, 1);
 }
 
+/*
+ * check if worm touches agent
+ */
+ 
 void Game::touch(GameAgent *agent)
 { unsigned row=agent->getRow(),
            col=agent->getCol();
