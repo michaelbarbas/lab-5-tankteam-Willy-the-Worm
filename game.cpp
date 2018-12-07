@@ -238,20 +238,28 @@ void Game::stepOff(GameAgent *agent, int col)
 }
 
 bool Game::hasPresent(GameAgent *agent, int row, int col)
-{ ActiveGameElement *a;
-
+{ 
+  
+  ActiveGameElement *a;
   if(!valid(row,col)) return false;
 
   list<GameElement *> &e=LEVEL(row, col);
+	
+  	
 
   for(list<GameElement *>::iterator i=e.begin(); i!=e.end(); i++)
-    if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i))
-       && a->isPresent())
+  {
+    if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i)) && a->isPresent())
+	{
+	  willy->addScore(this, 100); //adds 100 points
 	  //add 100 point here
 	  //replave with blank
       return true;
+	}
+	
 
-  return false;
+	return false;
+  }
 }
 
 void Game::switchLevel(int new_level)

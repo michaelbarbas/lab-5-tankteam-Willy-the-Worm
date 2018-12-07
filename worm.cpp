@@ -129,6 +129,8 @@ bool Worm::ifLegal(Game *game, Command command)
     
   switch(command)
   { case LEFT:
+  
+  
       if(!game->hasSolid(this, nextY, (int)x-1))
       { dir=command;
         y=nextY;
@@ -145,7 +147,7 @@ bool Worm::ifLegal(Game *game, Command command)
 	return true;
       }
       return false;
-
+	  
     case UP:
       if(game->hasClimbable(this, (int)y, (int)x)
          && game->hasClimbable(this, (int)y-1, (int)x))
