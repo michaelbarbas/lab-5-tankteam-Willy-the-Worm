@@ -54,12 +54,13 @@ bool Ball::clock(Game *game)
   if(!jumpstate && !game->hasClimbable(this, (int)y, (int)x)
      && !game->hasSolid(this, (int)y+1, (int)x))
     y++;
+  /*  
   else
     // Can we legally carry out the command?
     if(!ifLegal(game,game->getCommand()))
       if(!ifLegal(game,dir))
         ifLegal(game,STOP);
-
+  */  
   // Check for anything active where we are.
   if(oldX!=x || oldY!=y)
   { checkout(game, oldX!=x && oldY==y, oldX);
@@ -105,97 +106,3 @@ void Ball::checkout(Game *game, bool stepOff, unsigned oldX)
       game->setCommand(STOP);
     }
 }
-
-/* Try to carry out a command.
- * Return true if it was possible, false otherwise.
- */
-bool Ball::ifLegal(Game *game, Command command)
-{ int nextY=y;
-
-  if(jumpstate)
-  { int ideal=jumpbase;
-
-    if(jumpstate>3)
-      ideal-=7-jumpstate;
-    else
-      ideal-=jumpstate-1;
-
-    if(ideal>(int)y) nextY++;
-    else if(ideal<(int)y) nextY--;
-  }
-
-  // Check 
-    
-  switch(command)
-  { case LEFT:
-      if(!game->hasSolid(this, nextY, (int)x-1))
-      { dir=command;
-        y=nextY;
-	x--;
-	return true;
-      }
-      return false;
-      
-    case RIGHT:
-      if(!game->hasSolid(this, nextY, (int)x+1))
-      { dir=command;
-        y=nextY;
-	x++;
-	return true;
-      }
-      return false;
-
-    case UP:
-      if(game->hasClimbable(this, (int)y, (int)x)
-         && game->hasClimbable(this, (int)y-1, (int)x))
-      { dir=command;
-	y--;
-	return true;
-      }
-      return false;
-
-    case DOWN:
-      if(game->hasClimbable(this, (int)y+1, (int)x))
-      { dir=DOWN;
-	y++;
-	return true;
-      }
-      return false;
-
-    case JUMP:
-      if(!jumpstate && game->hasSolid(this, (int)y+1, (int)x))
-      { jumpstate=6;
-        jumpbase=y;
-      }
-      return false; // We started the jump, someone else must do it.
-
-    case DIE:
-      die(game);
-      return true;
-
-    default:
-      if(!game->hasSolid(this, (int)nextY, (int)x))
-      { dir=STOP;
-        y=nextY;
-	return true;
-      }
-      return false;
-  }
-}
-/*
-string Ball::getStatus()
-{ ostringstream statline;
-	
-  statline << "Balls ";
-  if(lives<6)
-  { for(unsigned i=0; i<lives; i++)  
-      statline << '&';
-    for(unsigned i=lives; i<5; i++)
-      statline << ' ';
-  } else
-    statline << "&&&&&+";
-
-  statline << "  Score " << score << "  ";
-  return statline.str();
-}
-//*/

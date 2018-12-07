@@ -20,7 +20,7 @@ void Worm::die(Game *game)
   y=startRow;
   game->reset();
 }
-
+// Add points
 void Worm::addScore(Game *game, int points)
 { if(points>=0 || score>=(unsigned)-points)
     score+=points;
@@ -54,6 +54,7 @@ bool Worm::clock(Game *game)
   if(!jumpstate && !game->hasClimbable(this, (int)y, (int)x)
      && !game->hasSolid(this, (int)y+1, (int)x))
     y++;
+  //TODO 
   else
     // Can we legally carry out the command?
     if(!ifLegal(game,game->getCommand()))
@@ -190,7 +191,7 @@ string Worm::getStatus()
   if(lives<6)
   { for(unsigned i=0; i<lives; i++)  
       statline << '&';
-    for(unsigned i=lives; i<5; i++)
+    for(unsigned i=lives; i<6; i++)
       statline << ' ';
   } else
     statline << "&&&&&+";
