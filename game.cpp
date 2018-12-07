@@ -251,7 +251,7 @@ bool Game::hasPresent(GameAgent *agent, int row, int col)
   {
     if(*i!=agent && (a=dynamic_cast<ActiveGameElement *>(*i)) && a->isPresent())
 	{
-	  willy->addScore(this, 100); //adds 100 points
+	  //willy->addScore(this, 100); //adds 100 points
 	  //add 100 point here
 	  //replave with blank
       return true;

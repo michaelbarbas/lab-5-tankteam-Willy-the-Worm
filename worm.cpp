@@ -84,11 +84,11 @@ void Worm::checkin(Game *game)
     { jumpstate=0;
       dir=STOP;
       game->setCommand(STOP);
-    } else
-	  if(game->hasPresent(this,y,x))
+    } else if(game->hasPresent(this,y,x))
+	  {
 		jumpstate=0;
-		//willy->addScore(this, 100);
-		
+		this->addScore(game, 100);
+	  }
 }
 
 /* Check to see if there is anything active at our location. */
